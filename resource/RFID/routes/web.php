@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('goi/controller', 'MyController@GetURL');
+Route::get('goiR1', function() {
+    return redirect()->route('R1');
+});
+
+Route::get('goi/controller', ['as'=>'R1', 'uses'=>'MyController@GetURL']);
 
 Route::get('form', function(){
 	return view('postForm');

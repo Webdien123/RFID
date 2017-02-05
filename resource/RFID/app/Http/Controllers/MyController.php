@@ -16,6 +16,10 @@ class MyController extends Controller
 
     public function postForm(Request $request)
     {
-    	echo "string";    
+    	echo 'họ tên đã nhập: ' . $request->HoTen . "</br>";
+        if($request->has('HoTen'))
+            echo "Có tham số";
+        else
+            echo "Không có tham số";
     }
 }
