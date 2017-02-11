@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('postForm');
 });
 
 Route::get('goiR1', function() {
@@ -25,4 +25,4 @@ Route::get('form', function(){
 	return view('postForm');
 });
 
-Route::post('postForm', ['as'=>'postForm', 'uses'=>'MyController@postForm']);
+Route::post('postForm', 'MyController@postForm');
