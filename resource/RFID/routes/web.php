@@ -21,8 +21,13 @@ Route::get('goiR1', function() {
 
 Route::get('goi/controller', ['as'=>'R1', 'uses'=>'MyController@GetURL']);
 
+//MAIN
 Route::get('form', function(){
 	return view('postForm');
 });
 
 Route::post('postForm', 'MyController@postForm');
+
+Route::get('trangquantri', function() {
+   return view('admin');
+});

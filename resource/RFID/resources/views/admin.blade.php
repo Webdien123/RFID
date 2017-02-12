@@ -16,10 +16,10 @@
 	</head>
 
 	<body>
-		<div class="container-fluid">
-			<a href="/trangquantri" class="btn btn-primary pull-right">Vào trang quản trị</a>
+		<div class="container">
+			<h1 class="text-center">Đăng ký thông tin</h1>
 
-			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
+			<h4 class="text-center">Vui lòng quét thẻ của bạn</h4>
 
 			<form action="postForm" method="post" id="myform" class="text-center">
 				{{ csrf_field() }}
@@ -27,16 +27,39 @@
 				<input type="submit"
 	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 			</form>
+
+			<h3>Thông tin cần đăng kí:</h3>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Họ tên</th>
+						<th>MSSV</th>
+						<th>Ngày sinh</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Nguyễn Công Ty</td>
+						<td>B1305056</td>
+						<td>22/02/1989</td>
+						<td>
+							<button type="button" class="btn btn-warning">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								Sửa</button>
+
+							<button type="button" class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								Xóa</button>
+						</td>
+					</tr>
+
+
+				</tbody>
+			</table>
+
 		</div>
-		
-		<script type="text/javascript">
-			$(document).ready(function(){
-		        $("#MaThe").focus();
-		        $("#MaThe").focusout(function(){
-				    $("#MaThe").focus();
-				});
-			});
-		</script>
 		
 	</body>
 </html>
