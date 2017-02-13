@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Trang chủ</title>
+		<title>Trang đăng kí</title>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -17,20 +17,58 @@
 
 	<body>
 		<div class="container">
-			<h1 class="text-center">Đăng ký thông tin</h1>
+			<h1 class="text-center">Đăng ký thẻ mới</h1>
 
-			<h4 class="text-center">Vui lòng quét thẻ của bạn</h4>
-
-			<form action="postForm" method="post" id="myform" class="text-center">
+			<!-- <form action="postForm" method="post" id="myform" class="text-center">
 				{{ csrf_field() }}
-				Mã thẻ: <input type="text" name="HoTen" id="MaThe" readonly>
+				<input type="text" name="HoTen" id="MaThe" readonly>
 				<input type="submit"
 	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
-			</form>
+			</form></br> -->
 
-			<h3>Thông tin cần đăng kí:</h3>
+			<div class="panel panel-info col-sm-6 col-sm-offset-3">
+				<div class="panel-heading">
+					<h3 class="panel-title">Thông tin đăng kí</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-hover">
+						<!-- <thead>
+							<tr>
+								<th>Họ Tên</th>
+								<th>Nguyễn Công Trường</th>
+							</tr>
+						</thead> -->
+						<tbody>
+							<tr>
+								<th>Họ tên</th>
+								<td>Nguyễn Công Trường</td>
+							</tr>
 
-			<table class="table table-hover">
+							<tr>
+								<th>MSSV</th>
+								<td>B1301110</td>
+							</tr>
+
+							<tr>
+								<th>Ngày sinh</th>
+								<td>01/02/1995</td>
+							</tr>
+
+							<tr>
+								<th>Thẻ đăng ký</th>
+								<td>
+									<input type="text" name="HoTen" id="MaThe" readonly>
+									(quét thẻ để đăng kí)
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
+
+			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
 						<th>Họ tên</th>
@@ -42,12 +80,12 @@
 				<tbody>
 					<tr>
 						<td>Nguyễn Công Ty</td>
-						<td>B1305056</td>
-						<td>22/02/1989</td>
+						<td>B1301011</td>
+						<td>22/02/1995</td>
 						<td>
 							<button type="button" class="btn btn-warning">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa</button>
+								Sửa thông tin</button>
 
 							<button type="button" class="btn btn-danger">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -55,11 +93,54 @@
 						</td>
 					</tr>
 
+					<tr>
+						<td>Nguyễn Công An</td>
+						<td>B1301012</td>
+						<td>13/12/1996</td>
+						<td>
+							<button type="button" class="btn btn-warning">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								Sửa thông tin</button>
+
+							<button type="button" class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								Xóa</button>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Nguyễn Công Công</td>
+						<td>B1301013</td>
+						<td>14/09/1994</td>
+						<td>
+							<button type="button" class="btn btn-warning">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								Sửa thông tin</button>
+
+							<button type="button" class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								Xóa</button>
+						</td>
+					</tr>
 
 				</tbody>
 			</table>
 
 		</div>
 		
+		<script type="text/javascript">
+			$(document).ready(function(){
+		        $("#MaThe").focus();
+		        $("#MaThe").focusout(function(){
+				    $("#MaThe").focus();
+				});
+			});
+			$(document).keypress(function(e) {
+			    if(e.which == 13) {
+			        alert('You pressed enter!');
+			    }
+			});
+		</script>
+
 	</body>
 </html>

@@ -17,7 +17,17 @@
 
 	<body>
 		<div class="container-fluid">
-			<a href="/trangquantri" class="btn btn-primary pull-right">Vào trang quản trị</a>
+			<div class="btn-group col-sm-12">
+				<a href="/" class="btn btn-primary col-sm-2">
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					Trang chủ
+				</a>
+				<a href="/trangquantri" class="btn btn-info col-sm-2">
+					<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+					Trang quản trị
+				</a>
+			</div>
+
 
 			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
 
