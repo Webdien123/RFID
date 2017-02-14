@@ -32,12 +32,14 @@
 				</div>
 				<div class="panel-body">
 					<table class="table table-hover">
-						<!-- <thead>
+						<thead>
 							<tr>
-								<th>Họ Tên</th>
-								<th>Nguyễn Công Trường</th>
+								<th>Thẻ đăng kí</th>
+								<th>
+									<input type="text" name="HoTen" id="MaThe" readonly>
+								</th>
 							</tr>
-						</thead> -->
+						</thead>
 						<tbody>
 							<tr>
 								<th>Họ tên</th>
@@ -55,10 +57,18 @@
 							</tr>
 
 							<tr>
-								<th>Thẻ đăng ký</th>
-								<td>
-									<input type="text" name="HoTen" id="MaThe" readonly>
-									(quét thẻ để đăng kí)
+								<td colspan="2">
+									<!-- <button type="button" class="btn btn-success">
+										<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+										Đăng ký sau</button> -->
+
+									<button type="button" class="btn btn-success">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+										Sửa thông tin</button>
+
+									<button type="button" class="btn btn-danger">
+										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+										Xóa</button>
 								</td>
 							</tr>
 						</tbody>
@@ -83,7 +93,7 @@
 						<td>B1301011</td>
 						<td>22/02/1995</td>
 						<td>
-							<button type="button" class="btn btn-warning">
+							<button type="button" class="btn btn-success">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								Sửa thông tin</button>
 
@@ -98,7 +108,7 @@
 						<td>B1301012</td>
 						<td>13/12/1996</td>
 						<td>
-							<button type="button" class="btn btn-warning">
+							<button type="button" class="btn btn-success">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								Sửa thông tin</button>
 
@@ -113,7 +123,7 @@
 						<td>B1301013</td>
 						<td>14/09/1994</td>
 						<td>
-							<button type="button" class="btn btn-warning">
+							<button type="button" class="btn btn-success">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								Sửa thông tin</button>
 
@@ -128,19 +138,7 @@
 
 		</div>
 		
-		<script type="text/javascript">
-			$(document).ready(function(){
-		        $("#MaThe").focus();
-		        $("#MaThe").focusout(function(){
-				    $("#MaThe").focus();
-				});
-			});
-			$(document).keypress(function(e) {
-			    if(e.which == 13) {
-			        alert('You pressed enter!');
-			    }
-			});
-		</script>
+		<script src="/js/focus_card.js"></script>
 
 	</body>
 </html>

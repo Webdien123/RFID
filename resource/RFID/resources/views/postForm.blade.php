@@ -31,7 +31,7 @@
 
 			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
 
-			<form action="postForm" method="post" id="myform" class="text-center">
+			<form action="#" method="post" class="text-center">
 				{{ csrf_field() }}
 				Mã thẻ: <input type="text" name="HoTen" id="MaThe" readonly>
 				<input type="submit"
@@ -39,14 +39,7 @@
 			</form>
 		</div>
 		
-		<script type="text/javascript">
-			$(document).ready(function(){
-		        $("#MaThe").focus();
-		        $("#MaThe").focusout(function(){
-				    $("#MaThe").focus();
-				});
-			});
-		</script>
+		<script src="/js/focus_card.js"></script>
 		
 	</body>
 </html>
