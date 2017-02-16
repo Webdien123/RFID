@@ -16,15 +16,15 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<h1 class="text-center">Đăng ký thẻ mới</h1>
+		<div class="container-fluid">
+			<!-- <div class="btn-group col-sm-12"> -->
+				<a href="/" class="btn btn-warning col-sm-2 pull-right">
+					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+					Đăng xuất
+				</a>
+			<!-- </div> -->
 
-			<!-- <form action="postForm" method="post" id="myform" class="text-center">
-				{{ csrf_field() }}
-				<input type="text" name="HoTen" id="MaThe" readonly>
-				<input type="submit"
-	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
-			</form></br> -->
+			<h1 class="text-center">Đăng ký thẻ mới</h1>
 
 			<div class="panel panel-info col-sm-6 col-sm-offset-3">
 				<div class="panel-heading">
