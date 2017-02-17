@@ -5,8 +5,11 @@ $(document).ready(function(){
 	});
 });
 
-$('#MaThe').keypress(function(e) {
-    if(e.which == 13) {
-        alert('You pressed enter!');
-    }
+$('#MaThe').keyup(function() {
+  $('#MaThe').val('');
+});
+
+$( "#f_quet_the" ).submit(function( event ) {
+  // alert( "Handler for .submit() called." );
+  event.preventDefault();
 });

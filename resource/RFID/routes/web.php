@@ -31,3 +31,7 @@ Route::post('postForm', 'MyController@postForm');
 Route::get('trangquantri', function() {
    return view('admin');
 });
+
+// Route::get('trangquantri', ['as'=>'admin', function(){
+// 	return view('admin');
+// }]);

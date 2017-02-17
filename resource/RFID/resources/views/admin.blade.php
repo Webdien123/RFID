@@ -36,7 +36,7 @@
 							<tr>
 								<th>Thẻ đăng kí</th>
 								<th>
-									<input type="text" name="HoTen" id="MaThe" readonly>
+									<input type="text" name="HoTen" id="MaThe">
 								</th>
 							</tr>
 						</thead>

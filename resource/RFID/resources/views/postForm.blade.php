@@ -31,9 +31,9 @@
 
 			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
 
-			<form action="#" method="post" class="text-center">
+			<form action="#" method="post" class="text-center" id="f_quet_the">
 				{{ csrf_field() }}
-				Mã thẻ: <input type="text" name="HoTen" id="MaThe" readonly>
+				Mã thẻ: <input type="text" name="HoTen" id="MaThe">
 				<input type="submit"
 	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 			</form>
