@@ -11,5 +11,5 @@ $('#MaThe').keyup(function() {
 
 $( "#f_quet_the" ).submit(function( event ) {
   // alert( "Handler for .submit() called." );
-  event.preventDefault();
+  
 });

@@ -31,7 +31,7 @@
 
 			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
 
-			<form action="#" method="post" class="text-center" id="f_quet_the">
+			<form action="{{ route('admin') }}" method="post" class="text-center" id="f_quet_the">
 				{{ csrf_field() }}
 				Mã thẻ: <input type="text" name="HoTen" id="MaThe">
 				<input type="submit"

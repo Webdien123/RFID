@@ -22,4 +22,9 @@ class MyController extends Controller
         else
             echo "Không có tham số";
     }
+
+    public function GetViewAdmin(Request $request)
+    {
+        return view('admin');
+    }
 }
