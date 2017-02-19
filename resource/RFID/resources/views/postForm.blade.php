@@ -27,18 +27,55 @@
 					Trang quản trị
 				</a>
 			</div>
-
+			</br>
 
 			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
 
-			<form action="{{ route('admin') }}" method="post" class="text-center" id="f_quet_the">
+			<form action="" method="post" class="text-center" id="f_quet_the">
 				{{ csrf_field() }}
-				Mã thẻ: <input type="text" name="HoTen" id="MaThe">
+				Mã thẻ: <input type="text" name="id" id="MaThe">
 				<input type="submit"
 	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 			</form>
 
-			
+			</br>
+
+			<!-- <div class="panel panel-primary col-sm-6 col-sm-offset-3">
+				<div class="panel-heading">
+					<h3 class="panel-title">Thông tin thẻ</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Mã thẻ</th>
+								<th class="text-primary">0007207266</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Họ tên</th>
+								<td>
+									Nguyễn Công Trường
+									<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+									Đọc họ tên</button>
+								</td>
+							</tr>
+
+							<tr>
+								<th>MSSV</th>
+								<td>B1301110</td>
+							</tr>
+
+							<tr>
+								<th>Ngày sinh</th>
+								<td>01/02/1995</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div> -->
 		</div>
 		
 		<script src="/js/focus_card.js"></script>

@@ -18,7 +18,7 @@
 	<body>
 		<div class="container-fluid">
 			<!-- <div class="btn-group col-sm-12"> -->
-				<a href="/" class="btn btn-warning col-sm-2 pull-right">
+				<a href="/" class="btn btn-warning col-sm-2 col-sm-offset-10">
 					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 					Đăng xuất
 				</a>
@@ -36,7 +36,12 @@
 							<tr>
 								<th>Thẻ đăng kí</th>
 								<th>
-									<input type="text" name="HoTen" id="MaThe">
+									<form action="" method="post">
+										{{ csrf_field() }}
+										<input type="text" name="id" id="MaThe">
+										<input type="submit"
+							   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
+									</form>
 								</th>
 							</tr>
 						</thead>
