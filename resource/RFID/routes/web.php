@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('postForm');
+    return view('page2');
 });
 
 Route::get('goiR1', function() {
