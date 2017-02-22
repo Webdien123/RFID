@@ -22,7 +22,7 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					Trang chủ
 				</a>
-				<a href="/trangquantri" class="btn btn-info col-sm-2">
+				<a href="/login" class="btn btn-info col-sm-2">
 					<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
 					Trang quản trị
 				</a>
@@ -31,7 +31,7 @@
 
 			<h1 class="text-center">Vui lòng quét thẻ của bạn</h1>
 
-			<form action="" method="post" class="text-center" id="f_quet_the">
+			<form action="/Input_card" method="post" class="text-center" id="f_quet_the">
 				{{ csrf_field() }}
 				Mã thẻ: <input type="text" name="id" id="MaThe">
 				<input type="submit"
@@ -40,42 +40,8 @@
 
 			</br>
 
-			<!-- <div class="panel panel-primary col-sm-6 col-sm-offset-3">
-				<div class="panel-heading">
-					<h3 class="panel-title">Thông tin thẻ</h3>
-				</div>
-				<div class="panel-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Mã thẻ</th>
-								<th class="text-primary">0007207266</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>Họ tên</th>
-								<td>
-									Nguyễn Công Trường
-									<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-									Đọc họ tên</button>
-								</td>
-							</tr>
-
-							<tr>
-								<th>MSSV</th>
-								<td>B1301110</td>
-							</tr>
-
-							<tr>
-								<th>Ngày sinh</th>
-								<td>01/02/1995</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div> -->
+			@yield('Input_card')
+			
 		</div>
 		
 		<script src="/js/focus_card.js"></script>

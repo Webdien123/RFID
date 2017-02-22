@@ -27,4 +27,10 @@ class MyController extends Controller
     {
         return view('admin');
     }
+
+    public function Res_card(Request $request)
+    {
+        return view('input_card',['mathe'=>($request->id)]);
+
+    }
 }

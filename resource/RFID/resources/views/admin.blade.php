@@ -26,60 +26,66 @@
 
 			<h1 class="text-center">Đăng ký thẻ mới</h1>
 
-			<div class="panel panel-info col-sm-6 col-sm-offset-3">
-				<div class="panel-heading">
-					<h3 class="panel-title">Thông tin đăng kí</h3>
-				</div>
-				<div class="panel-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Thẻ đăng kí</th>
-								<th>
-									<form action="" method="post">
-										{{ csrf_field() }}
-										<input type="text" name="id" id="MaThe">
-										<input type="submit"
-							   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
-									</form>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>Họ tên</th>
-								<td>Nguyễn Công Trường</td>
-							</tr>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title">Thông tin đăng kí</h3>
+						</div>
+						<div class="panel-body">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Thẻ đăng kí</th>
+										<th>
+											<form action="/" method="post">
+												{{ csrf_field() }}
+												<input type="text" name="id" id="MaThe">
+												<input type="submit"
+									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
+											</form>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>Họ tên</th>
+										<td>Nguyễn Công Trường</td>
+									</tr>
 
-							<tr>
-								<th>MSSV</th>
-								<td>B1301110</td>
-							</tr>
+									<tr>
+										<th>MSSV</th>
+										<td>B1301110</td>
+									</tr>
 
-							<tr>
-								<th>Ngày sinh</th>
-								<td>01/02/1995</td>
-							</tr>
+									<tr>
+										<th>Ngày sinh</th>
+										<td>01/02/1995</td>
+									</tr>
 
-							<tr>
-								<td colspan="2">
-									<!-- <button type="button" class="btn btn-success">
-										<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-										Đăng ký sau</button> -->
+									<tr>
+										<td colspan="2">
+											<!-- <button type="button" class="btn btn-success">
+												<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+												Đăng ký sau</button> -->
 
-									<button type="button" class="btn btn-success">
-										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-										Sửa thông tin</button>
+											<button type="button" class="btn btn-success">
+												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												Sửa thông tin</button>
 
-									<button type="button" class="btn btn-danger">
-										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-										Xóa</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+											<button type="button" class="btn btn-danger">
+												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+												Xóa</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+			</div>
 				</div>
 			</div>
+
+			
 
 			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
 

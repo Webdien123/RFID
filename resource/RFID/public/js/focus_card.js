@@ -11,5 +11,5 @@ $('#MaThe').keyup(function() {
 
 $( "#f_quet_the" ).submit(function( event ) {
   
-  event.preventDefault();
+  // event.preventDefault();
 });
