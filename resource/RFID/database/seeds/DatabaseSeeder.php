@@ -11,6 +11,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+    	$this->call(SinhVienData::class);
+    	$this->call(DangKyTheData::class);
     }
 }
+
+/**
+* Lớp tạo seed cho bảng sinh viên
+*/
+class SinhVienData extends Seeder
+{
+	
+	public function run()
+	{
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300001', 'Nguyễn Văn A', '0919000001']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300002', 'Nguyễn Văn B', '0919000002']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300003', 'Nguyễn Văn C', '0919000003']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300004', 'Nguyễn Văn D', '0919000004']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300005', 'Nguyễn Văn E', '0919000005']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300006', 'Nguyễn Văn F', '0919000006']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300007', 'Nguyễn Văn G', '0919000007']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300008', 'Nguyễn Văn H', '0919000008']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300009', 'Nguyễn Văn I', '0919000009']);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt) values (?, ?, ?)', ['B1300010', 'Nguyễn Văn J', '0919000010']);
+	}
+}
+
+class DangKyTheData extends Seeder
+{
+	
+	public function run()
+	{
+		DB::insert('insert into dang_ky_the (id, mssv) values (?, ?)', ['0005706269', 'B1300003']);
+	}
+}
+
