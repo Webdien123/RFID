@@ -46,11 +46,42 @@ Route::get('qb/get', function() {
 	// $data = DB::select('select * from sinhvien order by hoten');
     $data = DB::table('sinhvien')
     ->orderBy('hoten', 'asc')->skip(1)->take(5)->get();
-    foreach ($data as $row) {
+       foreach ($data as $row) {
         foreach ($row as $key => $value) {
                 echo $key.' : '.$value."<br>";
         }
         echo "<hr>";
+    }
+});
+
+Route::get('model/themsv', function() {
+    try {
+        $sv = new App\sinhvien();
+        $sv->mssv = "B1300011";
+        $sv->hoten = "Nguyễn Văn Ve";
+        $sv->sdt = "0919000011";
+
+        $sv->save();
+        echo "Thêm SV thành công";
+    } catch (Exception $e) {
+        echo "Thêm SV thất bại</br>";
+        echo $e->getMessage();
+    }
+    
+});
+
+Route::get('model/getsv', function() {
+    try {
+        $data = App\sinhvien::all()->toArray();
+        foreach ($data as $row) {
+        foreach ($row as $key => $value) {
+                echo $key.' : '.$value."<br>";
+        }
+        echo "<hr>";
+        }
+    } catch (Exception $e) {
+        echo "Lấy DS sv thất bại</br>";
+        echo $e->getMessage();    
     }
 });
 
