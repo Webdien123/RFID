@@ -31,9 +31,7 @@ Route::get('login', function() {
     return view('login');
 });
 
-// Route::post('Input_card', function($mathe) {
-//     return view('input_card',['mathe'=>$mathe]);
-// });
+Route::post('CheckLogin', ['as' => 'checklogin', 'uses' => 'MyController@login']);
 
 Route::get('trangquantri', function() {
    return view('admin');
@@ -91,5 +89,7 @@ Route::get('xoabang', function() {
     Schema::dropIfExists('dang_ky_the');
     Schema::dropIfExists('sinhvien');
     Schema::dropIfExists('migrations');
+    Schema::dropIfExists('users');
+    Schema::dropIfExists('taikhoan');
     echo "Đã xóa các bảng";
 });

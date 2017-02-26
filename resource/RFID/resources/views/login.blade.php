@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Trang chủ</title>
+		<title>Đăng nhập</title>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -23,20 +23,23 @@
 						<h3 class="panel-title">Đăng nhập</h3>
 					</div>
 					<div class="panel-body">
-						<form action="" method="POST" role="form">
+						<form action="/CheckLogin" method="POST">
+							{{ csrf_field() }}
 							<div class="form-group">
 								<label for="">Tên đang nhập:</label>
-								<input type="text" class="form-control" id="" placeholder="tên đăng nhập">
+								<input type="text" name="uname" class="form-control" id="" placeholder="tên đăng nhập">
 							</div>
 						
 							<div class="form-group">
 								<label for="">Mật khẩu:</label>
-								<input type="text" class="form-control" id="" placeholder="mật khẩu">
+								<input type="text" name="pass" class="form-control" id="" placeholder="mật khẩu">
 							</div>
 						
-							<a href="/trangquantri" class="btn btn-success">
+							<button type="submit" class="btn btn-success">
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 								Đăng nhập</a>
+							</button>
+							
 							<a href="/" class="btn btn-primary">
 								<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 								Về trang chủ</a>

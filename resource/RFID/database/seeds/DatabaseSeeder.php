@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
     	$this->call(SinhVienData::class);
     	$this->call(DangKyTheData::class);
+    	$this->call(TaiKhoan::class);
     }
 }
 
@@ -43,6 +44,19 @@ class DangKyTheData extends Seeder
 	public function run()
 	{
 		DB::insert('insert into dang_ky_the (id, mssv) values (?, ?)', ['0005706269', 'B1300003']);
+	}
+}
+
+/**
+* 
+*/
+class TaiKhoan extends Seeder
+{
+	
+	public function run()
+	{
+		DB::insert('insert into users (name, password) values (?, ?)', ['admin', bcrypt('admin')]);
+		
 	}
 }
 

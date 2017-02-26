@@ -40,7 +40,7 @@
 										<th>
 											<form action="/" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe">
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ trên đầu đọc">
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 											</form>
