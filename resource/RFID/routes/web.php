@@ -72,13 +72,15 @@ Route::get('model/themsv', function() {
 
 Route::get('model/getsv', function() {
     try {
-        $data = App\sinhvien::all()->toArray();
-        foreach ($data as $row) {
-        foreach ($row as $key => $value) {
-                echo $key.' : '.$value."<br>";
-        }
-        echo "<hr>";
-        }
+        $data = App\sinhvien::find('B1300003')->dang_ky_the;
+        // $data = DB::select('select * from dang_ky_the where id = ?',['0005706269']);
+        // foreach ($data as $row) {
+        //     foreach ($row as $key => $value) {
+        //         echo $key.' : '.$value."<br>";
+        //     }
+        //     echo "<hr>";
+        // }
+        echo $data->id;
     } catch (Exception $e) {
         echo "Lấy DS sv thất bại</br>";
         echo $e->getMessage();    
