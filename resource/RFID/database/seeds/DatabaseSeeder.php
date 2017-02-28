@@ -13,11 +13,12 @@ class DatabaseSeeder extends Seeder
     {
     	$this->call(SinhVienData::class);
     	$this->call(DangKyTheData::class);
+    	$this->call(TaiKhoanData::class);
     }
 }
 
 /**
-* Lớp tạo seed cho bảng sinh viên
+* Lớp tạo dữ liệu cho sinh viên
 */
 class SinhVienData extends Seeder
 {
@@ -37,12 +38,27 @@ class SinhVienData extends Seeder
 	}
 }
 
+/**
+*Lớp tạo dữ liệu các thẻ đã đăng ký
+*/
 class DangKyTheData extends Seeder
 {
 	
 	public function run()
 	{
 		DB::insert('insert into dang_ky_the (id, mssv) values (?, ?)', ['0005706269', 'B1300003']);
+	}
+}
+
+/**
+*Lớp tạo dữ liệu tài khoản quản trị viên
+*/
+class TaiKhoanData extends Seeder
+{
+	
+	public function run()
+	{
+		DB::insert('insert into taikhoan (uname, pass) values (?, ?)', ['admin', Hash::make("admin")]);
 	}
 }
 
