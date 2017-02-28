@@ -23,20 +23,23 @@
 						<h3 class="panel-title">Đăng nhập</h3>
 					</div>
 					<div class="panel-body">
-						<form action="" method="POST" role="form">
+						<form action="/login_process" method="POST">
+							{{ csrf_field() }}
 							<div class="form-group">
 								<label for="">Tên đang nhập:</label>
-								<input type="text" class="form-control" id="" placeholder="tên đăng nhập">
+								<input type="text" class="form-control" name="uname" placeholder="tên đăng nhập">
 							</div>
 						
 							<div class="form-group">
 								<label for="">Mật khẩu:</label>
-								<input type="text" class="form-control" id="" placeholder="mật khẩu">
+								<input type="password" class="form-control" name="pass" placeholder="mật khẩu">
 							</div>
-						
-							<a href="/trangquantri" class="btn btn-success">
+
+							<button type="submit" class="btn btn-default">
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-								Đăng nhập</a>
+								Đăng nhập
+							</button>
+
 							<a href="/" class="btn btn-primary">
 								<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 								Về trang chủ</a>

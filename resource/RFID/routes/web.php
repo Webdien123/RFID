@@ -31,6 +31,8 @@ Route::get('login', function() {
     return view('login');
 });
 
+Route::post('login_process', 'MyController@login_process');
+
 // Route::post('Input_card', function($mathe) {
 //     return view('input_card',['mathe'=>$mathe]);
 // });
@@ -43,8 +45,13 @@ Route::post('Input_card', ['as'=>'admin', 'uses'=>'MyController@Res_card']);
 
 //database
 Route::get('model/sv', function() {
-	$data = App\sinhvien::find('B1300005')->the;
-    echo $data->id;
+	$data = App\taikhoan::all()->toArray();
+    foreach ($data as $row) {
+        foreach ($row as $key => $value) {
+            echo $key." : ".$value."</br>";
+        }
+        echo "</hr>";
+    }
 });
 
 Route::get('xoabang', function() {
