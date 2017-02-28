@@ -42,16 +42,9 @@ Route::get('trangquantri', function() {
 Route::post('Input_card', ['as'=>'admin', 'uses'=>'MyController@Res_card']);
 
 //database
-Route::get('qb/get', function() {
-	// $data = DB::select('select * from sinhvien order by hoten');
-    $data = DB::table('sinhvien')
-    ->orderBy('hoten', 'asc')->skip(1)->take(5)->get();
-    foreach ($data as $row) {
-        foreach ($row as $key => $value) {
-                echo $key.' : '.$value."<br>";
-        }
-        echo "<hr>";
-    }
+Route::get('model/sv', function() {
+	$data = App\sinhvien::find('B1300005')->the;
+    echo $data->id;
 });
 
 Route::get('xoabang', function() {
