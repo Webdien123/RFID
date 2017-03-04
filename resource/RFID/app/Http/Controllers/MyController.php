@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 use App\taikhoan;
+use App\sinhvien;
 
 class MyController extends Controller
 {
@@ -27,7 +28,8 @@ class MyController extends Controller
     public function goAdmin()
     {
         if (\Session::has('uname')) {
-            return view('admin');
+            $danhsachsv = sinhvien::all()->toArray();
+            return view('admin', ['danhsachsv' => $danhsachsv]);
         }
         else{
             return redirect()->route('login');

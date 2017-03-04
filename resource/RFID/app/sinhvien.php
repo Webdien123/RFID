@@ -9,6 +9,7 @@ class sinhvien extends Model
     protected $table = "sinhvien";
     public $timestamps = false;
     protected $primaryKey = 'mssv';
+    protected $keyType = 'string';
 
     public function the()
     {

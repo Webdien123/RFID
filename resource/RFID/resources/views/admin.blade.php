@@ -36,13 +36,15 @@
 						</div>
 						<div class="panel-body">
 							<table class="table table-hover">
+
+							@if (count($danhsachsv) > 0)
 								<thead>
 									<tr>
 										<th>Thẻ đăng kí</th>
 										<th>
 											<form action="/" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe">
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí">
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 											</form>
@@ -52,24 +54,37 @@
 								<tbody>
 									<tr>
 										<th>Họ tên</th>
-										<td>Nguyễn Công Trường</td>
+										<td>
+											{{ $danhsachsv[0]['hoten'] }}
+										</td>
 									</tr>
 
 									<tr>
 										<th>MSSV</th>
-										<td>B1301110</td>
+										<td>
+											{{ $danhsachsv[0]['mssv'] }}
+										</td>
+									</tr>
+
+									<tr>
+										<th>Số điện thoại</th>
+										<td>
+											{{ $danhsachsv[0]['sdt'] }}
+										</td>
 									</tr>
 
 									<tr>
 										<th>Ngày sinh</th>
-										<td>01/02/1995</td>
+										<td>
+											{{ date("d-m-Y", strtotime($danhsachsv[0]['ngsinh'])) }}
+										</td>
 									</tr>
 
 									<tr>
 										<td colspan="2">
-											<!-- <button type="button" class="btn btn-success">
+											<button type="button" class="btn btn-info">
 												<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-												Đăng ký sau</button> -->
+												Đăng ký sau</button>
 
 											<button type="button" class="btn btn-success">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -81,71 +96,62 @@
 										</td>
 									</tr>
 								</tbody>
+							@else
+								<thead>
+									<tr>
+										<th>Không có thông tin, thêm sinh viên mới nếu muốn đăng kí tiếp tục</th>
+									</tr>						
+								</thead>
+							@endif
+								
 							</table>
 						</div>
 			</div>
 				</div>
 			</div>
-
-			
-
 			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
-
+			<button type="button" class="btn btn-primary col-sm-2">
+				<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+				Thêm sinh viên
+			</button>
+			
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
 						<th>Họ tên</th>
 						<th>MSSV</th>
+						<th>Số điện thoại</th>
 						<th>Ngày sinh</th>
-						<th></th>
+						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
+				@if( count($danhsachsv) > 1 )
+					@for($i = 1; $i < count($danhsachsv); $i++)
+						<tr>
+							<td>{{ $danhsachsv[$i]['hoten'] }}</td>
+							<td>{{ $danhsachsv[$i]['mssv'] }}</td>
+							<td>{{ $danhsachsv[$i]['sdt'] }}</td>
+							<td>{{ date("d-m-Y", strtotime($danhsachsv[$i]['ngsinh'])) }}</td>
+
+							<td>
+								<button type="button" class="btn btn-success">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									Sửa thông tin</button>
+
+								<button type="button" class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									Xóa</button>
+							</td>
+						</tr>
+					@endfor
+				@else
 					<tr>
-						<td>Nguyễn Công Ty</td>
-						<td>B1301011</td>
-						<td>22/02/1995</td>
-						<td>
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa thông tin</button>
-
-							<button type="button" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								Xóa</button>
-						</td>
+						<th colspan="5" class="text-center">
+							danh sách trống
+						</th>
 					</tr>
-
-					<tr>
-						<td>Nguyễn Công An</td>
-						<td>B1301012</td>
-						<td>13/12/1996</td>
-						<td>
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa thông tin</button>
-
-							<button type="button" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								Xóa</button>
-						</td>
-					</tr>
-
-					<tr>
-						<td>Nguyễn Công Công</td>
-						<td>B1301013</td>
-						<td>14/09/1994</td>
-						<td>
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa thông tin</button>
-
-							<button type="button" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								Xóa</button>
-						</td>
-					</tr>
-
+				@endif
 				</tbody>
 			</table>
 
