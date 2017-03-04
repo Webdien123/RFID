@@ -14,17 +14,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('goiR1', function() {
-    return redirect()->route('R1');
-});
-
-Route::get('goi/controller', ['as'=>'R1', 'uses'=>'MyController@GetURL']);
-
-//MAIN
-Route::get('form', function(){
-	return view('postForm');
-});
-
 Route::post('postForm', 'MyController@postForm');
 
 Route::get('login', function() {

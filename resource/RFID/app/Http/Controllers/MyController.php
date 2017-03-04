@@ -9,23 +9,6 @@ use App\taikhoan;
 
 class MyController extends Controller
 {
-    public function GetURL(Request $request)
-    {
-    	if($request->is('*'))
-    		echo "Có từ này";
-    	else
-    		echo "Không có từ này";
-    }
-
-    public function postForm(Request $request)
-    {
-    	echo 'họ tên đã nhập: ' . $request->HoTen . "</br>";
-        if($request->has('HoTen'))
-            echo "Có tham số";
-        else
-            echo "Không có tham số";
-    }
-
     public function GetViewAdmin(Request $request)
     {
         return view('admin');
@@ -38,13 +21,16 @@ class MyController extends Controller
 
     public function login_process(Request $request)
     {
-        echo "username: ".$request->uname;
-        echo "</br> password: ".$request->pass."</br>";
-
         $taikhoan = taikhoan::find($request->uname);
+        if ($taikhoan == null) {
+            \Session::put('err', '1');
+            return view('login');
+        }
+        
         if ($taikhoan->KT_taikhoan($request->pass)) {
             echo "</br>Đăng nhập thành công";
         } else {
+            \Session::put('err', '1');
             echo "</br>Đăng nhập thất bại";
         }
         
