@@ -17,12 +17,14 @@
 
 	<body>
 		<div class="container-fluid">
-			<!-- <div class="btn-group col-sm-12"> -->
-				<a href="/" class="btn btn-warning col-sm-2 col-sm-offset-10">
+			<div class="col-sm-2 col-sm-offset-10">
+					{!! 'Xin chào: <b>'.Session::get('uname').'</b>' !!}
+
+				<a href="/logout" class="btn btn-warning">
 					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 					Đăng xuất
 				</a>
-			<!-- </div> -->
+			</div>
 
 			<h1 class="text-center">Đăng ký thẻ mới</h1>
 

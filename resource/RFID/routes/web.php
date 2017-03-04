@@ -16,21 +16,15 @@ Route::get('/', function () {
 
 Route::post('postForm', 'MyController@postForm');
 
-Route::get('login', function() {
-    return view('login');
-});
+Route::get('login', 'MyController@login')->name('login');
 
 Route::post('login_process', 'MyController@login_process');
 
-// Route::post('Input_card', function($mathe) {
-//     return view('input_card',['mathe'=>$mathe]);
-// });
-
-Route::get('trangquantri', function() {
-   return view('admin');
-});
+Route::get('trangquantri', 'MyController@goAdmin')->name('goAdmin');
 
 Route::post('Input_card', ['as'=>'admin', 'uses'=>'MyController@Res_card']);
+
+Route::get('logout', 'MyController@logout');
 
 //database
 Route::get('model/sv', function() {

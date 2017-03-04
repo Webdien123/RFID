@@ -1,11 +1,17 @@
 $(document).ready(function () {
 
-    $('#uname, #pass').keypress(function() {
+    $('#uname').focus();
+
+    $( '#uname, #pass' ).keypress(function() {
+        $('h4').remove();
+    });
+
+    $( "#f_dgnhap" ).submit(function( event ) {
         $('h4').remove();
     });
 
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
-    $("#f_dgnhap").validate({
+    $( "#f_dgnhap" ).validate({
         rules: {
             uname: "required",
             pass: "required"
