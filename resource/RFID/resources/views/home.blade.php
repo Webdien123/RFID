@@ -22,7 +22,7 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					Trang chủ
 				</a>
-				<a href="/login" class="btn btn-info col-sm-2">
+				<a href="/trangquantri" class="btn btn-info col-sm-2">
 					<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
 					Trang quản trị
 				</a>

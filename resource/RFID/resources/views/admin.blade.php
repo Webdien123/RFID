@@ -18,7 +18,6 @@
 
 		<script src="/js/validate_addsv_form.js"></script>
 
-		<script src="/js/admin.js"></script>
 	</head>
 
 	<body>
@@ -61,28 +60,28 @@
 									<tr>
 										<th>Họ tên</th>
 										<td>
-											{{ $danhsachsv[0]['hoten'] }}
+											{{ $danhsachsv[0]->hoten }}
 										</td>
 									</tr>
 
 									<tr>
 										<th>MSSV</th>
-										<td>
-											{{ $danhsachsv[0]['mssv'] }}
+										<td id="ms_0">
+											{{ $danhsachsv[0]->mssv }}
 										</td>
 									</tr>
 
 									<tr>
 										<th>Số điện thoại</th>
 										<td>
-											{{ $danhsachsv[0]['sdt'] }}
+											{{ $danhsachsv[0]->sdt }}
 										</td>
 									</tr>
 
 									<tr>
 										<th>Ngày sinh</th>
 										<td>
-											{{ date("d-m-Y", strtotime($danhsachsv[0]['ngsinh'])) }}
+											{{ date("d-m-Y", strtotime($danhsachsv[0]->ngsinh)) }}
 										</td>
 									</tr>
 
@@ -96,7 +95,9 @@
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												Sửa thông tin</button>
 
-											<button type="button" class="btn btn-danger" id="xoa_sv_1">
+											<button type="button" class="btn btn-danger"
+											onclick="if(window.confirm('Xóa sinh viên này?')){
+											window.location.replace('<?php echo "/XoaSV/".$danhsachsv[0]->mssv; ?>');}">
 												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 												Xóa</button>
 										</td>
@@ -185,19 +186,22 @@
 				@if( count($danhsachsv) > 1 )
 					@for($i = 1; $i < count($danhsachsv); $i++)
 						<tr>
-							<td>{{ $danhsachsv[$i]['hoten'] }}</td>
-							<td>{{ $danhsachsv[$i]['mssv'] }}</td>
-							<td>{{ $danhsachsv[$i]['sdt'] }}</td>
-							<td>{{ date("d-m-Y", strtotime($danhsachsv[$i]['ngsinh'])) }}</td>
+							<td>{{ $danhsachsv[$i]->hoten }}</td>
+							<td>{{ $danhsachsv[$i]->mssv }}</td>
+							<td>{{ $danhsachsv[$i]->sdt }}</td>
+							<td>{{ date("d-m-Y", strtotime($danhsachsv[$i]->ngsinh)) }}</td>
 
 							<td>
 								<button type="button" class="btn btn-success">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Sửa thông tin</button>
 
-								<button type="button" class="btn btn-danger">
+								<button type="button" class="btn btn-danger"
+									onclick="if(window.confirm('Xóa sinh viên này?')){
+									window.location.replace('<?php echo "/XoaSV/".$danhsachsv[$i]->mssv; ?>');}">
 									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-									Xóa</button>
+									Xóa
+								</button>
 							</td>
 						</tr>
 					@endfor

@@ -28,7 +28,7 @@ class MyController extends Controller
     public function goAdmin()
     {
         if (\Session::has('uname')) {
-            $danhsachsv = sinhvien::all()->toArray();
+            $danhsachsv = \DB::table('sinhvien')->where('dangki', false)->get();
             return view('admin', ['danhsachsv' => $danhsachsv]);
         }
         else{
@@ -80,7 +80,13 @@ class MyController extends Controller
     {
         $sinhvien = sinhvien::find($mssv);
         if ($sinhvien != null) {
-            $sinhvien->delete();
+            try {
+                $sinhvien->delete();
+                return redirect('/trangquantri');
+            } catch (Exception $e) {
+                echo "Xóa thất bại"."<br>";
+                echo $e->getMessage();
+            }
         }
     }
 }
