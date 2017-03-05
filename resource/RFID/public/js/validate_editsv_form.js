@@ -5,7 +5,7 @@ $(document).ready(function () {
     // }, "Mã số sinh viên có dạng Bxxxxxxx.");
 
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
-    $( "#f_addsv, #feditsv" ).validate({
+    $( "#f_editsv" ).validate({
         rules: {
             hoten: "required",
             mssv:{

@@ -10,9 +10,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'MyController@GetViewHome');
 
 Route::post('postForm', 'MyController@postForm');
 
@@ -30,20 +28,6 @@ Route::post('AddSV', 'MyController@AddSV');
 
 Route::get('XoaSV/{mssv}', 'MyController@XoaSV');
 
-//database
-Route::get('model/sv', function() {
-	$data = App\taikhoan::all()->toArray();
-    foreach ($data as $row) {
-        foreach ($row as $key => $value) {
-            echo $key." : ".$value."</br>";
-        }
-        echo "</hr>";
-    }
-});
+Route::get('SuaSV/{mssv}', 'MyController@SuaSV');
 
-Route::get('xoabang', function() {
-    Schema::dropIfExists('dang_ky_the');
-    Schema::dropIfExists('sinhvien');
-    Schema::dropIfExists('migrations');
-    echo "Đã xóa các bảng";
-});
+Route::post('XuLySuaSV', 'MyController@XuLySuaSV');

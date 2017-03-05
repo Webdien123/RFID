@@ -10,9 +10,9 @@ use App\sinhvien;
 
 class MyController extends Controller
 {
-    public function GetViewAdmin(Request $request)
+    public function GetViewHome(Request $request)
     {
-        return view('admin');
+        return view('home');
     }
 
     public function Res_card(Request $request)
@@ -68,6 +68,7 @@ class MyController extends Controller
             $sinhvien->mssv = $request->mssv;
             $sinhvien->sdt = $request->sdt;
             $sinhvien->ngsinh = $request->ngsinh;
+            $sinhvien->dangki = false;
             $sinhvien->save();
             return redirect('/trangquantri');
         } catch (Exception $e) {
@@ -88,5 +89,31 @@ class MyController extends Controller
                 echo $e->getMessage();
             }
         }
+    }
+
+    public function SuaSV($mssv)
+    {
+        $sinhvien = sinhvien::find($mssv);
+        if ($sinhvien != null) {;
+            return view('Edit', ['sv' => $sinhvien]);
+        }
+    }
+
+    public function XuLySuaSV(Request $request)
+    {
+        $sinhvien = sinhvien::find($request->mssv);
+        if ($sinhvien != null) {
+            try {
+                $sinhvien->hoten = $request->hoten;
+                $sinhvien->sdt = $request->sdt;
+                $sinhvien->ngsinh = $request->ngsinh;
+                $sinhvien->save();
+                return redirect('/trangquantri');
+            } catch (Exception $e) {
+                echo "Sửa thông tin thất bại<br>";
+                echo $e->getMessage();
+            }
+        }
+        
     }
 }

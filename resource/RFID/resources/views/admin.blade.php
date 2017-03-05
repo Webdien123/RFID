@@ -47,9 +47,9 @@
 									<tr>
 										<th>Thẻ đăng kí</th>
 										<th>
-											<form action="/" method="post">
+											<form action="/Input_card" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí">
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí" readonly>
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 											</form>
@@ -87,13 +87,10 @@
 
 									<tr>
 										<td colspan="2">
-											<button type="button" class="btn btn-info">
-												<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-												Đăng ký sau</button>
 
-											<button type="button" class="btn btn-success">
+											<a href="/SuaSV/{{ $danhsachsv[0]->mssv }}" target="_blank" class="btn btn-success">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-												Sửa thông tin</button>
+												Sửa thông tin</a>
 
 											<button type="button" class="btn btn-danger"
 											onclick="if(window.confirm('Xóa sinh viên này?')){
@@ -117,7 +114,7 @@
 				</div>
 			</div>
 			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
-			<button type="button" class="btn btn-primary col-sm-2"  data-toggle="modal" href='#modal-themsv'>
+			<button type="button" class="btn btn-primary col-sm-2"  data-toggle="modal" href='#modal-themsv' id="btn_them_sv">
 				<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 				Thêm sinh viên
 			</button>
@@ -192,9 +189,10 @@
 							<td>{{ date("d-m-Y", strtotime($danhsachsv[$i]->ngsinh)) }}</td>
 
 							<td>
-								<button type="button" class="btn btn-success">
+								<a href="<?php echo '/SuaSV/'.$danhsachsv[$i]->mssv; ?>" target="_blank" class="btn btn-success">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									Sửa thông tin</button>
+									Sửa thông tin
+								</a>
 
 								<button type="button" class="btn btn-danger"
 									onclick="if(window.confirm('Xóa sinh viên này?')){
