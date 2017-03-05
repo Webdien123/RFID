@@ -12,7 +12,7 @@
 						<tr>
 							<th>Mã thẻ</th>
 							<th class="text-primary">
-								0007185273
+								<?php echo $mathe; ?>
 							</th>
 						</tr>
 					</thead>

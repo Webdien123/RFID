@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
-    // $.validator.addMethod("regx", function(value, element, regexpr) {          
-    //     return regexpr.test(value);
-    // }, "Mã số sinh viên có dạng Bxxxxxxx.");
+    $("#success-alert").fadeTo(1000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+    });
 
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
     $( "#f_addsv, #feditsv" ).validate({
