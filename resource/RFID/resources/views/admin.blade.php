@@ -13,6 +13,12 @@
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+		<script src="/js/jquery.validate.js"></script>
+
+		<script src="/js/validate_addsv_form.js"></script>
+
+		<script src="/js/admin.js"></script>
 	</head>
 
 	<body>
@@ -90,7 +96,7 @@
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												Sửa thông tin</button>
 
-											<button type="button" class="btn btn-danger">
+											<button type="button" class="btn btn-danger" id="xoa_sv_1">
 												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 												Xóa</button>
 										</td>
@@ -110,10 +116,60 @@
 				</div>
 			</div>
 			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
-			<button type="button" class="btn btn-primary col-sm-2">
+			<button type="button" class="btn btn-primary col-sm-2"  data-toggle="modal" href='#modal-themsv'>
 				<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 				Thêm sinh viên
 			</button>
+
+			<div class="modal fade" id="modal-themsv">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Thêm sinh viên</h4>
+						</div>
+						<div class="modal-body">
+							<form action="/AddSV" method="POST" id="f_addsv">
+								{{ csrf_field() }}
+								<div class="form-group">
+									<label for="">Họ tên:</label>
+									<input type="text" name="hoten" id="hoten" class="form-control" placeholder="họ tên">
+								</div>
+
+								<div class="form-group">
+									<label for="">MSSV:</label>
+									<input type="text" name="mssv" id="mssv" class="form-control" placeholder="mã số sinh viên">
+								</div>
+
+								<div class="form-group">
+									<label for="">Số điện thoại:</label>
+									<input type="text" name="sdt" id="sdt" class="form-control" placeholder="số điện thoại">
+								</div>
+
+								<div class="form-group">
+									<label for="">Ngày sinh:</label>
+									<input type="date" name="ngsinh" id="ngsinh" class="form-control">
+								</div>
+
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+									Hủy
+								</button>
+
+								<button type="submit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+									Thêm sinh viên
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
 			
 			<table class="table table-hover table-bordered">
 				<thead>

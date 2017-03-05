@@ -59,4 +59,28 @@ class MyController extends Controller
         \Session::forget('err');
         return redirect('/');
     }
+
+    public function AddSV(Request $request)
+    {
+        try {
+            $sinhvien = new sinhvien();
+            $sinhvien->hoten = $request->hoten;
+            $sinhvien->mssv = $request->mssv;
+            $sinhvien->sdt = $request->sdt;
+            $sinhvien->ngsinh = $request->ngsinh;
+            $sinhvien->save();
+            return redirect('/trangquantri');
+        } catch (Exception $e) {
+            echo "Thêm thất bại"."<br>";
+            echo $e->getMessage();
+        }
+    }
+
+    public function XoaSV($mssv)
+    {
+        $sinhvien = sinhvien::find($mssv);
+        if ($sinhvien != null) {
+            $sinhvien->delete();
+        }
+    }
 }

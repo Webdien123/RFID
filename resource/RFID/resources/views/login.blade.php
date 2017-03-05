@@ -15,7 +15,7 @@
 
 		<script src="/js/jquery.validate.js"></script>
 
-		<script src="/js/validate_form.js"></script>
+		<script src="/js/validate_login_form.js"></script>
 	</head>
 	<body>
 		<div class="container-fluid">

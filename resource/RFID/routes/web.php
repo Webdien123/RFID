@@ -26,6 +26,10 @@ Route::post('Input_card', ['as'=>'admin', 'uses'=>'MyController@Res_card']);
 
 Route::get('logout', 'MyController@logout');
 
+Route::post('AddSV', 'MyController@AddSV');
+
+Route::get('XoaSV/{mssv}', 'MyController@XoaSV');
+
 //database
 Route::get('model/sv', function() {
 	$data = App\taikhoan::all()->toArray();
