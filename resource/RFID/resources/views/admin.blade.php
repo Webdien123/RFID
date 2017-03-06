@@ -54,12 +54,6 @@
 												</div>
 											</th>
 										</tr>
-									@else
-										<tr>
-											<th colspan="2">
-												abc
-											</th>
-										</tr>
 									@endif
 
 									<tr>

@@ -18,7 +18,14 @@ class MyController extends Controller
 
     public function Res_card(Request $request)
     {
-        return view('input_card',['mathe'=>($request->id)]);
+        $dkthe = dang_ky_the::find($request->id);
+        if ($dkthe) {
+            $sinhvien = sinhvien::find($dkthe->mssv);
+            return view('input_card',['mathe'=>($request->id), 'sv' => $sinhvien]);
+        }
+        else{
+            return view('non_res_card');
+        }
     }
 
     public function login()

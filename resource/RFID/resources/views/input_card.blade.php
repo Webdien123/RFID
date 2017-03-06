@@ -20,8 +20,9 @@
 						<tr>
 							<th>Họ tên</th>
 							<td>
-								Nguyễn Công Trường
-								<button type="button" class="btn btn-default">
+								<script src='/js/responsivevoice.js'></script>
+								<?php echo $sv->hoten; ?>
+								<button type="button" class="btn btn-default" onclick='responsiveVoice.speak("Nguyễn Thị Nhân", "Vietnamese Male");'>
 								<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 								Đọc họ tên</button>
 							</td>
@@ -29,19 +30,22 @@
 
 						<tr>
 							<th>MSSV</th>
-							<td>B1301110</td>
+							<td>
+								<?php echo $sv->mssv; ?>
+							</td>
 						</tr>
 
 						<tr>
 							<th>Ngày sinh</th>
-							<td>01/02/1995</td>
+							<td>
+								<?php echo date("d-m-Y", strtotime($sv->ngsinh)); ?>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 @endsection
