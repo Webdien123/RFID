@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use GoogleSpeech\TextToSpeech;
 use Hash;
 use App\taikhoan;
 use App\sinhvien;
@@ -21,7 +22,19 @@ class MyController extends Controller
         $dkthe = dang_ky_the::find($request->id);
         if ($dkthe) {
             $sinhvien = sinhvien::find($dkthe->mssv);
-            return view('input_card',['mathe'=>($request->id), 'sv' => $sinhvien]);
+            if ($sinhvien) {
+                $speech = new TextToSpeech();
+                $speech
+                    ->withLanguage('vi')
+                    ->inPath('./audios');
+
+                $speech->withName($dkthe->mssv);
+                $speech->download($sinhvien->hoten);
+
+                // echo 'File generated:' . $speech->getCompletePath() . '<br>';
+
+                return view('input_card',['mathe'=>($request->id), 'sv' => $sinhvien]);
+            }
         }
         else{
             return view('non_res_card');

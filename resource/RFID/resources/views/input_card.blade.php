@@ -20,9 +20,10 @@
 						<tr>
 							<th>Họ tên</th>
 							<td>
-								<script src='/js/responsivevoice.js'></script>
 								<?php echo $sv->hoten; ?>
-								<button type="button" class="btn btn-default" onclick='responsiveVoice.speak("Nguyễn Thị Nhân", "Vietnamese Male");'>
+								<audio id="audio-docten" src="<?php echo './audios/' . $sv->mssv . '.mp3'; ?>" hidden></audio>
+								<button type="button" id="btn_doc_ten" class="btn btn-default">
+								<script src="/js/input_card.js"></script>
 								<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 								Đọc họ tên</button>
 							</td>
