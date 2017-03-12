@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
-    // $.validator.addMethod("regx", function(value, element, regexpr) {          
-    //     return regexpr.test(value);
-    // }, "Mã số sinh viên có dạng Bxxxxxxx.");
+    $("#error-alert").fadeTo(3000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+    })
 
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
     $( "#f_editsv" ).validate({
@@ -15,7 +15,8 @@ $(document).ready(function () {
             sdt: {
                 required: true,
                 number: true,
-                minlength: 10
+                minlength: 10,
+                maxlength: 11
             },
             ngsinh: "required"
         },
@@ -29,7 +30,8 @@ $(document).ready(function () {
             sdt: {
                 required: "Bạn chưa nhập số điện thoại",
                 number: "Số điện thoại phải là chữ số",
-                minlength: "số điện thoại tối thiểu 10 chữ số"
+                minlength: "số điện thoại tối thiểu 10 chữ số",
+                maxlength: "số điện thoại tối đa 11 chữ số"
             },
             ngsinh: "Bạn chưa nhập ngày sinh"
         },

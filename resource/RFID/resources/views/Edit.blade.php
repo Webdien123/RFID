@@ -27,6 +27,23 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Sửa thông tin</h3>
 					</div>
+
+					@if( Session::get('kq_dki') == 'failed_update')
+						<tr>
+							<th colspan="2">
+								<div class="alert alert-danger alert-dismissable" id="error-alert">
+									<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+									<strong>Cập nhật thất bại!</strong> thông tin mới không hợp lệ
+								</div>
+							</th>
+						</tr>
+					@endif
+
+					<?php  
+						Session::forget('sv_dki');
+						Session::forget('kq_dki');
+					?>
+
 					<div class="panel-body">
 						<form action="/XuLySuaSV" method="POST" id="f_editsv">
 							{{ csrf_field() }}

@@ -25,7 +25,7 @@
 								<button type="button" id="btn_doc_ten" class="btn btn-default">
 								<script src="/js/input_card.js"></script>
 								<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-								Đọc họ tên</button>
+								Đọc lại họ tên</button>
 							</td>
 						</tr>
 

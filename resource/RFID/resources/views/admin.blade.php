@@ -22,13 +22,29 @@
 
 	<body>
 		<div class="container-fluid">
-			<div class="col-sm-2 col-sm-offset-10">
+			<div class="col-sm-12">
+				<div class="pull-left">
+					<a href="/" class="btn btn-primary">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						Trang chủ
+					</a>
+
+					<a href="/XoaThe" class="btn btn-info">
+						<span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+						Sinh viên đã đăng kí
+					</a>					
+				</div>
+
+
+				<div class="pull-right">
 					{!! 'Xin chào: <b>'.Session::get('uname').'</b>' !!}
 
-				<a href="/logout" class="btn btn-warning">
-					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-					Đăng xuất
-				</a>
+					<a href="/logout" class="btn btn-warning">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+						Đăng xuất
+					</a>
+				</div>
+				
 			</div>
 
 			<h1 class="text-center">Đăng ký thẻ mới</h1>
@@ -55,6 +71,33 @@
 											</th>
 										</tr>
 									@endif
+
+									@if( Session::get('kq_dki') == 'failed_card')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-danger alert-dismissable" id="error-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thất bại!</strong> Thẻ này đã có người đăng kí
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									@if( Session::get('kq_dki') == 'failed_sv')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-danger alert-dismissable" id="error-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thất bại!</strong> cập nhật thông tin sv thất bại
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									<?php  
+										Session::forget('sv_dki');
+										Session::forget('kq_dki');
+									?>
 
 									<tr>
 										<th>Thẻ đăng kí</th>

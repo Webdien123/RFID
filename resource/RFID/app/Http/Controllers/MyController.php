@@ -130,9 +130,9 @@ class MyController extends Controller
                 $sinhvien->ngsinh = $request->ngsinh;
                 $sinhvien->save();
                 return redirect('/trangquantri');
-            } catch (Exception $e) {
-                echo "Sửa thông tin thất bại<br>";
-                echo $e->getMessage();
+            } catch (\Exception $e) {
+                \Session::put('kq_dki', 'failed_update');
+                return redirect('/SuaSV/' . $request->mssv);
             }
         }
     }
@@ -144,16 +144,28 @@ class MyController extends Controller
             $dkthe->id = $request->id;
             $dkthe->mssv = $request->mssv;
             $dkthe->save();
+        } catch (\Exception $e) {
+            \Session::put('kq_dki', 'failed_card');
+            return redirect('trangquantri');
+        }
+
+        try {
             $sinhvien = sinhvien::find($request->mssv);
             $sinhvien->dangki = true;
             $sinhvien->save();
-            \Session::put('kq_dki', 'success');
-            \Session::put('sv_dki', $sinhvien->hoten);
+        } catch (\Exception $e) {
+            \Session::put('kq_dki', 'failed_sv');
             return redirect('trangquantri');
-
-        } catch (Exception $e) {
-            echo "Đăng kí thất bại<br>";
-            echo $e->getMessage();
         }
+
+        \Session::put('kq_dki', 'success');
+        \Session::put('sv_dki', $sinhvien->hoten);
+        return redirect('trangquantri');
+    }
+
+    public function XoaThe()
+    {
+        $danhsachthe = dang_ky_the::all();
+        return view('XoaThe', ['danhsachthe' => $danhsachthe]);
     }
 }
