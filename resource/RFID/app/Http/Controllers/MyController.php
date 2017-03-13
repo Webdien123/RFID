@@ -31,8 +31,6 @@ class MyController extends Controller
                 $speech->withName($dkthe->mssv);
                 $speech->download($sinhvien->hoten);
 
-                // echo 'File generated:' . $speech->getCompletePath() . '<br>';
-
                 return view('input_card',['mathe'=>($request->id), 'sv' => $sinhvien]);
             }
         }
@@ -167,5 +165,10 @@ class MyController extends Controller
     {
         $danhsachthe = dang_ky_the::all();
         return view('XoaThe', ['danhsachthe' => $danhsachthe]);
+    }
+
+    public function HuyThe($mssv)
+    {
+        echo "Hủy thẻ có mã số sinh viên: " . $mssv;
     }
 }

@@ -35,3 +35,5 @@ Route::post('XuLySuaSV', 'MyController@XuLySuaSV');
 Route::post('DangKiThe', 'MyController@DangKiThe');
 
 Route::get('XoaThe', 'MyController@XoaThe');
+
+Route::get('HuyThe/{mssv}', 'MyController@HuyThe');
