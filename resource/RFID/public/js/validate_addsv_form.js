@@ -1,12 +1,8 @@
 $(document).ready(function () {
 
-    $("#success-alert").fadeTo(1100, 500).slideUp(500, function(){
+    $("#success-alert").fadeTo(1000, 500).slideUp(500, function(){
         $("#success-alert").slideUp(500);
     });
-
-    $("#error-alert").fadeTo(5000, 500).slideUp(500, function(){
-        $("#success-alert").slideUp(500);
-    })
 
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
     $( "#f_addsv, #feditsv" ).validate({

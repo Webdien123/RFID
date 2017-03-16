@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use GoogleSpeech\TextToSpeech;
 use Hash;
 use App\taikhoan;
 use App\sinhvien;
@@ -19,24 +18,7 @@ class MyController extends Controller
 
     public function Res_card(Request $request)
     {
-        $dkthe = dang_ky_the::find($request->id);
-        if ($dkthe) {
-            $sinhvien = sinhvien::find($dkthe->mssv);
-            if ($sinhvien) {
-                $speech = new TextToSpeech();
-                $speech
-                    ->withLanguage('vi')
-                    ->inPath('./audios');
-
-                $speech->withName($dkthe->mssv);
-                $speech->download($sinhvien->hoten);
-
-                return view('input_card',['mathe'=>($request->id), 'sv' => $sinhvien]);
-            }
-        }
-        else{
-            return view('non_res_card');
-        }
+        return view('input_card',['mathe'=>($request->id)]);
     }
 
     public function login()
@@ -128,9 +110,9 @@ class MyController extends Controller
                 $sinhvien->ngsinh = $request->ngsinh;
                 $sinhvien->save();
                 return redirect('/trangquantri');
-            } catch (\Exception $e) {
-                \Session::put('kq_dki', 'failed_update');
-                return redirect('/SuaSV/' . $request->mssv);
+            } catch (Exception $e) {
+                echo "Sửa thông tin thất bại<br>";
+                echo $e->getMessage();
             }
         }
     }
@@ -142,33 +124,16 @@ class MyController extends Controller
             $dkthe->id = $request->id;
             $dkthe->mssv = $request->mssv;
             $dkthe->save();
-        } catch (\Exception $e) {
-            \Session::put('kq_dki', 'failed_card');
-            return redirect('trangquantri');
-        }
-
-        try {
             $sinhvien = sinhvien::find($request->mssv);
             $sinhvien->dangki = true;
             $sinhvien->save();
-        } catch (\Exception $e) {
-            \Session::put('kq_dki', 'failed_sv');
+            \Session::put('kq_dki', 'success');
+            \Session::put('sv_dki', $sinhvien->hoten);
             return redirect('trangquantri');
+
+        } catch (Exception $e) {
+            echo "Đăng kí thất bại<br>";
+            echo $e->getMessage();
         }
-
-        \Session::put('kq_dki', 'success');
-        \Session::put('sv_dki', $sinhvien->hoten);
-        return redirect('trangquantri');
-    }
-
-    public function XoaThe()
-    {
-        $danhsachthe = dang_ky_the::all();
-        return view('XoaThe', ['danhsachthe' => $danhsachthe]);
-    }
-
-    public function HuyThe($mssv)
-    {
-        echo "Hủy thẻ có mã số sinh viên: " . $mssv;
     }
 }
