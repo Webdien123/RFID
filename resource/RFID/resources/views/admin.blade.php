@@ -44,31 +44,12 @@
 
 							@if (count($danhsachsv) > 0)
 								<thead>
-
-									@if( Session::get('kq_dki') == 'success')
-										<tr>
-											<th colspan="2">
-												<div class="alert alert-success alert-dismissable" id="success-alert">
-													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-													<strong>Đăng kí thành công!</strong> sinh viên: <?php echo Session::get('sv_dki'); ?>
-												</div>
-											</th>
-										</tr>
-									@else
-										<tr>
-											<th colspan="2">
-												abc
-											</th>
-										</tr>
-									@endif
-
 									<tr>
 										<th>Thẻ đăng kí</th>
 										<th>
-											<form action="/DangKiThe" method="post">
+											<form action="/Input_card" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí">
-												<input type="hidden" name="mssv" value="{{ $danhsachsv[0]->mssv }}">
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí" readonly>
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 											</form>
@@ -118,7 +99,6 @@
 												Xóa</button>
 										</td>
 									</tr>
-
 								</tbody>
 							@else
 								<thead>

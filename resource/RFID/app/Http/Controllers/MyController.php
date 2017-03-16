@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Hash;
 use App\taikhoan;
 use App\sinhvien;
-use App\dang_ky_the;
 
 class MyController extends Controller
 {
@@ -115,25 +114,6 @@ class MyController extends Controller
                 echo $e->getMessage();
             }
         }
-    }
-
-    public function DangKiThe(Request $request)
-    {
-        try {
-            $dkthe = new dang_ky_the();
-            $dkthe->id = $request->id;
-            $dkthe->mssv = $request->mssv;
-            $dkthe->save();
-            $sinhvien = sinhvien::find($request->mssv);
-            $sinhvien->dangki = true;
-            $sinhvien->save();
-            \Session::put('kq_dki', 'success');
-            \Session::put('sv_dki', $sinhvien->hoten);
-            return redirect('trangquantri');
-
-        } catch (Exception $e) {
-            echo "Đăng kí thất bại<br>";
-            echo $e->getMessage();
-        }
+        
     }
 }
