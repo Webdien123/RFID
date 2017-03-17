@@ -1,7 +1,9 @@
 $(document).ready(function(){
-    $("#audio-docten").get(0).play();
+    var S = $("#hoten").val();
+    responsiveVoice.speak(S,"Vietnamese Male");
 
     $('#btn_doc_ten').click(function (e) {
-    	$("#audio-docten").get(0).play();
+    	var S = $("#hoten").val();
+        responsiveVoice.speak(S,"Vietnamese Male");
     });
 });

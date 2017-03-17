@@ -12,7 +12,7 @@
 						<tr>
 							<th>Mã thẻ</th>
 							<th class="text-primary">
-								0007185273
+								{{ $mathe }}
 							</th>
 						</tr>
 					</thead>
@@ -20,8 +20,8 @@
 						<tr>
 							<th>Họ tên</th>
 							<td>
-								<?php echo $sv->hoten; ?>
-								<audio id="audio-docten" src="<?php echo './audios/' . $sv->mssv . '.mp3'; ?>" hidden></audio>
+								{{ $sv->hoten }}
+								<input type="text" name="hoten" id="hoten" value="{{ $sv->hoten }}" hidden>
 								<button type="button" id="btn_doc_ten" class="btn btn-default">
 								<script src="/js/input_card.js"></script>
 								<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
@@ -32,14 +32,14 @@
 						<tr>
 							<th>MSSV</th>
 							<td>
-								<?php echo $sv->mssv; ?>
+								{{ $sv->mssv }}
 							</td>
 						</tr>
 
 						<tr>
 							<th>Ngày sinh</th>
 							<td>
-								<?php echo date("d-m-Y", strtotime($sv->ngsinh)); ?>
+								{{ date("d-m-Y", strtotime($sv->ngsinh)) }}
 							</td>
 						</tr>
 					</tbody>

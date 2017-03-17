@@ -9,10 +9,7 @@
 	</head>
 
 	<body>
-		<div class="container-fluid">
-			<!-- <div class="row">
-				<img src="/img/theme.jpg" class="img-responsive col-sm-12" alt="Image">
-			</div> -->
+		<div class="container-fluid"> 
 
 			<div class="row">
 				<div class="col-sm-12 bg-success">
@@ -34,7 +31,7 @@
 
 			<form action="/Input_card" method="post" class="text-center" id="f_quet_the">
 				{{ csrf_field() }}
-				Mã thẻ: <input type="text" name="id" id="MaThe" readonly>
+				Mã thẻ: <input type="text" name="id" id="MaThe">
 				<input type="submit"
 	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 			</form>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Hash;
 use App\taikhoan;
 use App\sinhvien;
+use App\dang_ky_the;
 
 class MyController extends Controller
 {
@@ -17,7 +18,12 @@ class MyController extends Controller
 
     public function Res_card(Request $request)
     {
-        return view('input_card',['mathe'=>($request->id)]);
+        $the = dang_ky_the::find($request->id);
+        if($the){
+            $sv = $the->sinhvien;
+            return view('input_card',['mathe'=>($request->id), 'sv' => $sv]);    
+        }
+        
     }
 
     public function login()
@@ -114,6 +120,16 @@ class MyController extends Controller
                 echo $e->getMessage();
             }
         }
-        
+    }
+
+    public function XoaThe()
+    {
+        $danhsachthe = dang_ky_the::all();
+        return view('XoaThe', ['danhsachthe' => $danhsachthe]);
+    }
+
+    public function XuLyXoaThe($id, $xoasv)
+    {
+        echo "Xóa thẻ có id = " . $id . "\n Xóa sv = " . $xoasv;
     }
 }

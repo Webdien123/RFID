@@ -6,31 +6,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Trang đăng kí</title>
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-		<script src="/js/jquery.validate.js"></script>
+		@include('link_css_js')
 
 		<script src="/js/validate_addsv_form.js"></script>
+
+		<script src="/js/focus_card.js"></script>
 
 	</head>
 
 	<body>
 		<div class="container-fluid">
-			<div class="col-sm-2 col-sm-offset-10">
-					{!! 'Xin chào: <b>'.Session::get('uname').'</b>' !!}
-
-				<a href="/logout" class="btn btn-warning">
-					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-					Đăng xuất
-				</a>
-			</div>
-
+			@include('admin_header')
 			<h1 class="text-center">Đăng ký thẻ mới</h1>
 
 			<div class="row">
@@ -44,6 +30,45 @@
 
 							@if (count($danhsachsv) > 0)
 								<thead>
+
+									@if( Session::get('kq_dki') == 'success')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-success alert-dismissable" id="success-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thành công!</strong> sinh viên: <?php echo Session::get('sv_dki'); ?>
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									@if( Session::get('kq_dki') == 'failed_card')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-danger alert-dismissable" id="error-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thất bại!</strong> Thẻ này đã có người đăng kí
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									@if( Session::get('kq_dki') == 'failed_sv')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-danger alert-dismissable" id="error-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thất bại!</strong> cập nhật thông tin sv thất bại
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									<?php  
+										Session::forget('sv_dki');
+										Session::forget('kq_dki');
+									?>
+									
 									<tr>
 										<th>Thẻ đăng kí</th>
 										<th>
@@ -114,10 +139,21 @@
 				</div>
 			</div>
 			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
-			<button type="button" class="btn btn-primary col-sm-2"  data-toggle="modal" href='#modal-themsv' id="btn_them_sv">
-				<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-				Thêm sinh viên
-			</button>
+			<div class="col-sm-12">
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary"  data-toggle="modal" href='#modal-themsv' id="btn_them_sv">
+						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+						Thêm sinh viên
+					</button>
+
+					<a href="/XoaThe" target="_blank" class="btn btn-info">
+						<span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+						Sinh viên đã đăng kí
+					</a>				
+				</div>
+
+			</div>			
+
 
 			<div class="modal fade" id="modal-themsv">
 				<div class="modal-dialog">
@@ -163,10 +199,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
 
 			
 			<table class="table table-hover table-bordered">
@@ -214,8 +246,6 @@
 			</table>
 
 		</div>
-		
-		<script src="/js/focus_card.js"></script>
 
 	</body>
 </html>

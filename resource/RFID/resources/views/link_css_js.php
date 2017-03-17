@@ -6,3 +6,6 @@
 
 <!-- Bootstrap JavaScript -->
 <script src="/js/bootstrap.min.js"></script>
+
+<!-- Vietnamese speak api -->
+<script src='/js/responsivevoice.js'></script>

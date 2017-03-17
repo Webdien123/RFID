@@ -31,3 +31,11 @@ Route::get('XoaSV/{mssv}', 'MyController@XoaSV');
 Route::get('SuaSV/{mssv}', 'MyController@SuaSV');
 
 Route::post('XuLySuaSV', 'MyController@XuLySuaSV');
+
+Route::post('DangKiThe', 'MyController@DangKiThe');
+
+Route::get('XoaThe', 'MyController@XoaThe');
+
+Route::get('XuLyXoaThe/{id}/{xoasv}', 'MyController@XuLyXoaThe');
+
+Route::post('XuLySuaSV', 'MyController@XuLySuaSV');
