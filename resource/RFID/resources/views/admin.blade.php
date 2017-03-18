@@ -8,6 +8,8 @@
 
 		@include('link_css_js')
 
+		<script src="/js/jquery.validate.js"></script>
+
 		<script src="/js/validate_addsv_form.js"></script>
 
 		<script src="/js/focus_card.js"></script>
@@ -27,10 +29,7 @@
 						</div>
 						<div class="panel-body">
 							<table class="table table-hover">
-
-							@if (count($danhsachsv) > 0)
 								<thead>
-
 									@if( Session::get('kq_dki') == 'success')
 										<tr>
 											<th colspan="2">
@@ -53,85 +52,75 @@
 										</tr>
 									@endif
 
-									@if( Session::get('kq_dki') == 'failed_sv')
-										<tr>
-											<th colspan="2">
-												<div class="alert alert-danger alert-dismissable" id="error-alert">
-													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-													<strong>Đăng kí thất bại!</strong> cập nhật thông tin sv thất bại
-												</div>
-											</th>
-										</tr>
-									@endif
-
 									<?php  
 										Session::forget('sv_dki');
 										Session::forget('kq_dki');
 									?>
-									
+
+								@if (count($danhsachsv) > 0)
 									<tr>
 										<th>Thẻ đăng kí</th>
 										<th>
-											<form action="/Input_card" method="post">
+											<form action="/DangKiThe" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí" readonly>
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí">
+												<input type="hidden" name="mssv" value="{{ $danhsachsv[0]->mssv }}">
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 											</form>
 										</th>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>Họ tên</th>
-										<td>
-											{{ $danhsachsv[0]->hoten }}
-										</td>
-									</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>Họ tên</th>
+											<td>
+												{{ $danhsachsv[0]->hoten }}
+											</td>
+										</tr>
 
-									<tr>
-										<th>MSSV</th>
-										<td id="ms_0">
-											{{ $danhsachsv[0]->mssv }}
-										</td>
-									</tr>
+										<tr>
+											<th>MSSV</th>
+											<td id="ms_0">
+												{{ $danhsachsv[0]->mssv }}
+											</td>
+										</tr>
 
-									<tr>
-										<th>Số điện thoại</th>
-										<td>
-											{{ $danhsachsv[0]->sdt }}
-										</td>
-									</tr>
+										<tr>
+											<th>Số điện thoại</th>
+											<td>
+												{{ $danhsachsv[0]->sdt }}
+											</td>
+										</tr>
 
-									<tr>
-										<th>Ngày sinh</th>
-										<td>
-											{{ date("d-m-Y", strtotime($danhsachsv[0]->ngsinh)) }}
-										</td>
-									</tr>
+										<tr>
+											<th>Ngày sinh</th>
+											<td>
+												{{ date("d-m-Y", strtotime($danhsachsv[0]->ngsinh)) }}
+											</td>
+										</tr>
 
-									<tr>
-										<td colspan="2">
+										<tr>
+											<td colspan="2">
 
-											<a href="/SuaSV/{{ $danhsachsv[0]->mssv }}" target="_blank" class="btn btn-success">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-												Sửa thông tin</a>
+												<a href="/SuaSV/{{ $danhsachsv[0]->mssv }}" class="btn btn-success">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													Sửa thông tin</a>
 
-											<button type="button" class="btn btn-danger"
-											onclick="if(window.confirm('Xóa sinh viên này?')){
-											window.location.replace('<?php echo "/XoaSV/".$danhsachsv[0]->mssv; ?>');}">
-												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-												Xóa</button>
-										</td>
-									</tr>
-								</tbody>
-							@else
-								<thead>
-									<tr>
-										<th>Không có thông tin, thêm sinh viên mới nếu muốn đăng kí tiếp tục</th>
-									</tr>						
-								</thead>
-							@endif
+												<button type="button" class="btn btn-danger"
+												onclick="if(window.confirm('Xóa sinh viên này?')){
+												window.location.replace('<?php echo "/XoaSV/".$danhsachsv[0]->mssv; ?>');}">
+													<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+													Xóa</button>
+											</td>
+										</tr>
+									</tbody>
+									@else
+											<tr>
+												<th><i>Không có thông tin, thêm sinh viên mới nếu muốn đăng kí tiếp tục</i></th>
+											</tr>						
+										</thead>
+									@endif
 								
 							</table>
 						</div>
@@ -146,7 +135,7 @@
 						Thêm sinh viên
 					</button>
 
-					<a href="/XoaThe" target="_blank" class="btn btn-info">
+					<a href="/XoaThe" class="btn btn-info">
 						<span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
 						Sinh viên đã đăng kí
 					</a>				
@@ -221,7 +210,7 @@
 							<td>{{ date("d-m-Y", strtotime($danhsachsv[$i]->ngsinh)) }}</td>
 
 							<td>
-								<a href="<?php echo '/SuaSV/'.$danhsachsv[$i]->mssv; ?>" target="_blank" class="btn btn-success">
+								<a href="<?php echo '/SuaSV/'.$danhsachsv[$i]->mssv; ?>" class="btn btn-success">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Sửa thông tin
 								</a>
@@ -237,9 +226,9 @@
 					@endfor
 				@else
 					<tr>
-						<th colspan="5" class="text-center">
+						<th colspan="5" class="text-center"><i>
 							danh sách trống
-						</th>
+						</i></th>
 					</tr>
 				@endif
 				</tbody>

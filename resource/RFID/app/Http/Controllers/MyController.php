@@ -23,6 +23,9 @@ class MyController extends Controller
             $sv = $the->sinhvien;
             return view('input_card',['mathe'=>($request->id), 'sv' => $sv]);    
         }
+        else{
+            return view('non_res_card');
+        }
         
     }
 
@@ -83,7 +86,7 @@ class MyController extends Controller
         }
     }
 
-    public function XoaSV($mssv)
+    public static function XoaSV($mssv)
     {
         $sinhvien = sinhvien::find($mssv);
         if ($sinhvien != null) {
@@ -114,12 +117,41 @@ class MyController extends Controller
                 $sinhvien->sdt = $request->sdt;
                 $sinhvien->ngsinh = $request->ngsinh;
                 $sinhvien->save();
-                return redirect('/trangquantri');
-            } catch (Exception $e) {
-                echo "Sửa thông tin thất bại<br>";
-                echo $e->getMessage();
+                if($sinhvien->dangki == 'false')
+                    return redirect('/trangquantri');
+                else
+                    return redirect('/XoaThe');
+            } catch (\Exception $e) {
+                \Session::put('kq_dki', 'failed_update');
+                return redirect('/SuaSV/' . $request->mssv);
             }
         }
+    }
+
+    public function DangKiThe(Request $request)
+    {
+        try {
+            $dkthe = new dang_ky_the();
+            $dkthe->id = $request->id;
+            $dkthe->mssv = $request->mssv;
+            $dkthe->save();
+        } catch (\Exception $e) {
+            \Session::put('kq_dki', 'failed_card');
+            return redirect('trangquantri');
+        }
+
+        try {
+            $sinhvien = sinhvien::find($request->mssv);
+            $sinhvien->dangki = true;
+            $sinhvien->save();
+        } catch (\Exception $e) {
+            \Session::put('kq_dki', 'failed_sv');
+            return redirect('trangquantri');
+        }
+
+        \Session::put('kq_dki', 'success');
+        \Session::put('sv_dki', $sinhvien->hoten);
+        return redirect('trangquantri');
     }
 
     public function XoaThe()
@@ -130,6 +162,24 @@ class MyController extends Controller
 
     public function XuLyXoaThe($id, $xoasv)
     {
-        echo "Xóa thẻ có id = " . $id . "\n Xóa sv = " . $xoasv;
+        $the = dang_ky_the::find($id);
+        if($the){
+            try {
+                $the->delete();
+                if($xoasv == "true"){
+                    $sinhvien = $the->sinhvien;
+                    MyController::XoaSV($sinhvien->mssv);
+                }
+                else{
+                    $sinhvien = $the->sinhvien;
+                    $sinhvien->dangki = false;
+                    $sinhvien->save();
+                }
+                return redirect('/trangquantri');
+            } catch (\Exception $e) {
+                echo "Xóa thẻ thất bại<br>";
+                echo $e->getMessage();
+            }
+        }
     }
 }

@@ -34,18 +34,21 @@
 		 					<td>{{ date("d-m-Y", strtotime($danhsachthe[$i]->sinhvien->ngsinh)) }}</td>
 		 					<td>{{ $danhsachthe[$i]->id }}</td>
 		 					<td>
-								<a href="{{ '/SuaSV/'.$danhsachthe[$i]->mssv }}" target="_blank" class="btn btn-success">
+								<a href="{{ '/SuaSV/'.$danhsachthe[$i]->mssv }}" class="btn btn-success">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Sửa thông tin
 								</a>
 
 								<button type="button" class="btn btn-danger" 
 								onclick="
-									if(window.confirm('Xóa cả thông tin sinh viên này trong bộ nhớ?')){
-										window.location.replace('<?php echo "/XuLyXoaThe/".$danhsachthe[$i]->mssv."/true"; ?>');
-									}
-									else{
-										window.location.replace('<?php echo "/XuLyXoaThe/".$danhsachthe[$i]->mssv."/false"; ?>');
+									if(window.confirm('Hủy thẻ này?')){
+										if(window.confirm('Xóa cả thông tin của sinh viên này trong bộ nhớ?')){
+											window.location.replace('<?php echo "/XuLyXoaThe/".$danhsachthe[$i]->id."/true"; ?>');
+										}
+					
+										else{
+											window.location.replace('<?php echo "/XuLyXoaThe/".$danhsachthe[$i]->id."/false"; ?>');
+										}
 									}
 								">
 									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -54,6 +57,12 @@
 							</td>
 		 				</tr>
 		 			@endfor
+
+		 			@if(count($danhsachthe) == 0)
+		 				<tr>
+		 					<th colspan="6" class="text-center"><i>Hiện chua có sinh viên đăng kí thẻ</i></th>
+		 				</tr>
+		 			@endif
 	 			</tbody>
 	 		</table>
 		</div>

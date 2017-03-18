@@ -47,7 +47,7 @@ $(document).ready(function () {
         highlight: function(element,errorClass,validClass){
             $(element).parent(".form-group").addClass(errorClass).removeClass(validClass);   
         },
-	                
+                    
         unhighlight: function(element, errorClass, validClass) {
             $(element).parent(".form-group").removeClass(errorClass).addClass(validClass); 
         }

@@ -5,8 +5,14 @@
 				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 				Trang chủ
 			</a>
-		</div>
 
+			@if(strpos($_SERVER['REQUEST_URI'], 'SuaSV') || strpos($_SERVER['REQUEST_URI'], 'XoaThe'))
+				<a href="/trangquantri" class="btn btn-info">
+					<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+					Trang quản trị
+				</a>	
+			@endif
+		</div>
 
 		<div class="pull-right">
 			{!! 'Xin chào: <b>'.Session::get('uname').'</b>' !!}

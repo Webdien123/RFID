@@ -65,7 +65,16 @@
 									<input type="date" name="ngsinh" id="ngsinh" value="{{ $sv->ngsinh }}" class="form-control">
 								</div>
 
-								<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.top.close();">
+								<button type="button" class="btn btn-default" 
+								onclick="
+									if ({{ $sv->dangki }}) {
+										window.location.replace('<?php echo "/XoaThe" ?>');
+									} 
+									else {										
+										window.location.replace('<?php echo "/trangquantri" ?>');
+									}"
+									
+								">
 									<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 									Hủy
 								</button>
