@@ -1,15 +1,7 @@
 $(document).ready(function(){
     $("#MaThe").focus();
-    $("#MaThe").focusout(function(){
-	    $("#MaThe").focus();
+
+	$("#btn_them_sv").focus(function(){
+		$("#MaThe").focus();
 	});
-});
-
-// $('#MaThe').keyup(function() {
-//   // $('#MaThe').val('');
-// });
-
-$( "#f_quet_the" ).submit(function( event ) {
-  
-  // event.preventDefault();
 });

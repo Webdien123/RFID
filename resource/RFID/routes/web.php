@@ -10,86 +10,28 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'MyController@GetViewHome')->name('GetViewHome');
 
-Route::get('goiR1', function() {
-    return redirect()->route('R1');
-});
+Route::get('login', 'MyController@login')->name('login');
 
-Route::get('goi/controller', ['as'=>'R1', 'uses'=>'MyController@GetURL']);
+Route::post('login_process', 'MyController@login_process')->name('login_process');
 
-//MAIN
-Route::get('form', function(){
-	return view('postForm');
-});
+Route::get('trangquantri', 'MyController@goAdmin')->name('goAdmin');
 
-Route::post('postForm', 'MyController@postForm');
+Route::post('Input_card', ['as'=>'Input_card', 'uses'=>'MyController@Res_card']);
 
-Route::get('login', function() {
-    return view('login');
-});
+Route::get('logout', 'MyController@logout')->name('logout');
 
-Route::post('CheckLogin', ['as' => 'checklogin', 'uses' => 'MyController@login']);
+Route::post('AddSV', 'MyController@AddSV')->name('AddSV');
 
-Route::get('trangquantri', function() {
-   return view('admin');
-});
+Route::get('XoaSV/{mssv}', 'MyController@XoaSV')->name('XoaSV');
 
-Route::post('Input_card', ['as'=>'admin', 'uses'=>'MyController@Res_card']);
+Route::get('SuaSV/{mssv}', 'MyController@SuaSV')->name('SuaSV');
 
-//database
-Route::get('qb/get', function() {
-	// $data = DB::select('select * from sinhvien order by hoten');
-    $data = DB::table('sinhvien')
-    ->orderBy('hoten', 'asc')->skip(1)->take(5)->get();
-       foreach ($data as $row) {
-        foreach ($row as $key => $value) {
-                echo $key.' : '.$value."<br>";
-        }
-        echo "<hr>";
-    }
-});
+Route::post('XuLySuaSV', 'MyController@XuLySuaSV')->name('XuLySuaSV');
 
-Route::get('model/themsv', function() {
-    try {
-        $sv = new App\sinhvien();
-        $sv->mssv = "B1300011";
-        $sv->hoten = "Nguyễn Văn Ve";
-        $sv->sdt = "0919000011";
+Route::post('DangKiThe', 'MyController@DangKiThe')->name('DangKiThe');
 
-        $sv->save();
-        echo "Thêm SV thành công";
-    } catch (Exception $e) {
-        echo "Thêm SV thất bại</br>";
-        echo $e->getMessage();
-    }
-    
-});
+Route::get('XoaThe', 'MyController@XoaThe')->name('XoaThe');
 
-Route::get('model/getsv', function() {
-    try {
-        $data = App\sinhvien::find('B1300003')->dang_ky_the;
-        // $data = DB::select('select * from dang_ky_the where id = ?',['0005706269']);
-        // foreach ($data as $row) {
-        //     foreach ($row as $key => $value) {
-        //         echo $key.' : '.$value."<br>";
-        //     }
-        //     echo "<hr>";
-        // }
-        echo $data->id;
-    } catch (Exception $e) {
-        echo "Lấy DS sv thất bại</br>";
-        echo $e->getMessage();    
-    }
-});
-
-Route::get('xoabang', function() {
-    Schema::dropIfExists('dang_ky_the');
-    Schema::dropIfExists('sinhvien');
-    Schema::dropIfExists('migrations');
-    Schema::dropIfExists('users');
-    Schema::dropIfExists('taikhoan');
-    echo "Đã xóa các bảng";
-});
+Route::get('XuLyXoaThe/{id}/{xoasv}', 'MyController@XuLyXoaThe')->name('XuLyXoaThe');

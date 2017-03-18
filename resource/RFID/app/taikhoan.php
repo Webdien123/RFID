@@ -3,10 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Hash;
 
 class taikhoan extends Model
 {
-    protected $table = "users";
+    protected $table = "taikhoan";
+    protected $primaryKey = 'uname';
     public $timestamps = false;
-    protected $primaryKey = 'name';
+
+    public function KT_taikhoan($password)
+    {
+    	if (Hash::check($password, $this->pass)) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 }

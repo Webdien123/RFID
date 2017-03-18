@@ -6,24 +6,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Trang đăng kí</title>
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		@include('link_css_js')
+		<script src="<?php echo asset('js/jquery.validate.js')?>"></script>
 
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="<?php echo asset('js/validate_addsv_form.js')?>"></script>
+		
+		<script src="<?php echo asset('js/focus_card.js')?>"></script>
+
 	</head>
 
 	<body>
 		<div class="container-fluid">
-			<!-- <div class="btn-group col-sm-12"> -->
-				<a href="/" class="btn btn-warning col-sm-2 col-sm-offset-10">
-					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-					Đăng xuất
-				</a>
-			<!-- </div> -->
-
+			@include('admin_header')
 			<h1 class="text-center">Đăng ký thẻ mới</h1>
 
 			<div class="row">
@@ -35,121 +29,211 @@
 						<div class="panel-body">
 							<table class="table table-hover">
 								<thead>
+									@if( Session::get('kq_dki') == 'success')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-success alert-dismissable" id="success-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thành công!</strong> sinh viên: <?php echo Session::get('sv_dki'); ?>
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									@if( Session::get('kq_dki') == 'failed_card')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-danger alert-dismissable" id="error-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thất bại!</strong> Thẻ này đã có người đăng kí
+												</div>
+											</th>
+										</tr>
+									@endif
+
+									<?php  
+										Session::forget('sv_dki');
+										Session::forget('kq_dki');
+									?>
+
+								@if (count($danhsachsv) > 0)
 									<tr>
 										<th>Thẻ đăng kí</th>
 										<th>
-											<form action="/" method="post">
+											<form action="{{ route('DangKiThe') }}" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe" placeholder="quét thẻ trên đầu đọc">
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí">
+												<input type="hidden" name="mssv" value="{{ $danhsachsv[0]->mssv }}">
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 											</form>
 										</th>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>Họ tên</th>
-										<td>Nguyễn Công Trường</td>
-									</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>Họ tên</th>
+											<td>
+												{{ $danhsachsv[0]->hoten }}
+											</td>
+										</tr>
 
-									<tr>
-										<th>MSSV</th>
-										<td>B1301110</td>
-									</tr>
+										<tr>
+											<th>MSSV</th>
+											<td id="ms_0">
+												{{ $danhsachsv[0]->mssv }}
+											</td>
+										</tr>
 
-									<tr>
-										<th>Ngày sinh</th>
-										<td>01/02/1995</td>
-									</tr>
+										<tr>
+											<th>Số điện thoại</th>
+											<td>
+												{{ $danhsachsv[0]->sdt }}
+											</td>
+										</tr>
 
-									<tr>
-										<td colspan="2">
-											<!-- <button type="button" class="btn btn-success">
-												<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-												Đăng ký sau</button> -->
+										<tr>
+											<th>Ngày sinh</th>
+											<td>
+												{{ date("d-m-Y", strtotime($danhsachsv[0]->ngsinh)) }}
+											</td>
+										</tr>
 
-											<button type="button" class="btn btn-success">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-												Sửa thông tin</button>
+										<tr>
+											<td colspan="2">
 
-											<button type="button" class="btn btn-danger">
-												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-												Xóa</button>
-										</td>
-									</tr>
-								</tbody>
+												<a href="{{ route('SuaSV', ['mssv' => $danhsachsv[0]->mssv]) }}" class="btn btn-success">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													Sửa thông tin</a>
+
+												<button type="button" class="btn btn-danger"
+												onclick="if(window.confirm('Xóa sinh viên này?')){
+												window.location.replace('<?php echo route("XoaSV", ["mssv" => $danhsachsv[0]->mssv]) ?>');}">
+													<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+													Xóa</button>
+											</td>
+										</tr>
+									</tbody>
+									@else
+											<tr>
+												<th><i>Không có thông tin, thêm sinh viên mới nếu muốn đăng kí tiếp tục</i></th>
+											</tr>						
+										</thead>
+									@endif
+								
 							</table>
 						</div>
 			</div>
 				</div>
 			</div>
+			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
+			<div class="col-sm-12">
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary"  data-toggle="modal" href='#modal-themsv' id="btn_them_sv">
+						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+						Thêm sinh viên
+					</button>
+
+					<a href="{{ route('XoaThe') }}" class="btn btn-info">
+						<span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+						Sinh viên đã đăng kí
+					</a>				
+				</div>
+
+			</div>			
+
+
+			<div class="modal fade" id="modal-themsv">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Thêm sinh viên</h4>
+						</div>
+						<div class="modal-body">
+							<form action="{{ route('AddSV') }}" method="POST" id="f_addsv">
+								{{ csrf_field() }}
+								<div class="form-group">
+									<label for="">Họ tên:</label>
+									<input type="text" name="hoten" id="hoten" class="form-control" placeholder="họ tên">
+								</div>
+
+								<div class="form-group">
+									<label for="">MSSV:</label>
+									<input type="text" name="mssv" id="mssv" class="form-control" placeholder="mã số sinh viên">
+								</div>
+
+								<div class="form-group">
+									<label for="">Số điện thoại:</label>
+									<input type="text" name="sdt" id="sdt" class="form-control" placeholder="số điện thoại">
+								</div>
+
+								<div class="form-group">
+									<label for="">Ngày sinh:</label>
+									<input type="date" name="ngsinh" id="ngsinh" class="form-control">
+								</div>
+
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+									Hủy
+								</button>
+
+								<button type="submit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+									Thêm sinh viên
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			
-
-			<h3 class="col-sm-12">Danh sách đăng kí tiếp theo:</h3>
-
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
 						<th>Họ tên</th>
 						<th>MSSV</th>
+						<th>Số điện thoại</th>
 						<th>Ngày sinh</th>
-						<th></th>
+						<th>Thao tác</th>
 					</tr>
 				</thead>
 				<tbody>
+				@if( count($danhsachsv) > 1 )
+					@for($i = 1; $i < count($danhsachsv); $i++)
+						<tr>
+							<td>{{ $danhsachsv[$i]->hoten }}</td>
+							<td>{{ $danhsachsv[$i]->mssv }}</td>
+							<td>{{ $danhsachsv[$i]->sdt }}</td>
+							<td>{{ date("d-m-Y", strtotime($danhsachsv[$i]->ngsinh)) }}</td>
+
+							<td>
+								<a href="{{ route('SuaSV', ['mssv' => $danhsachsv[$i]->mssv]) }}" class="btn btn-success">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									Sửa thông tin
+								</a>
+
+								<button type="button" class="btn btn-danger"
+									onclick="if(window.confirm('Xóa sinh viên này?')){
+									window.location.replace('<?php echo route("XoaSV", ["mssv" => $danhsachsv[$i]->mssv]) ?>');}">
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									Xóa
+								</button>
+							</td>
+						</tr>
+					@endfor
+				@else
 					<tr>
-						<td>Nguyễn Công Ty</td>
-						<td>B1301011</td>
-						<td>22/02/1995</td>
-						<td>
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa thông tin</button>
-
-							<button type="button" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								Xóa</button>
-						</td>
+						<th colspan="5" class="text-center"><i>
+							danh sách trống
+						</i></th>
 					</tr>
-
-					<tr>
-						<td>Nguyễn Công An</td>
-						<td>B1301012</td>
-						<td>13/12/1996</td>
-						<td>
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa thông tin</button>
-
-							<button type="button" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								Xóa</button>
-						</td>
-					</tr>
-
-					<tr>
-						<td>Nguyễn Công Công</td>
-						<td>B1301013</td>
-						<td>14/09/1994</td>
-						<td>
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								Sửa thông tin</button>
-
-							<button type="button" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-								Xóa</button>
-						</td>
-					</tr>
-
+				@endif
 				</tbody>
 			</table>
 
 		</div>
-		
-		<script src="/js/focus_card.js"></script>
 
 	</body>
 </html>

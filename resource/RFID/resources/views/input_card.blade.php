@@ -12,7 +12,7 @@
 						<tr>
 							<th>Mã thẻ</th>
 							<th class="text-primary">
-								0007185273
+								{{ $mathe }}
 							</th>
 						</tr>
 					</thead>
@@ -20,28 +20,33 @@
 						<tr>
 							<th>Họ tên</th>
 							<td>
-								Nguyễn Công Trường
-								<button type="button" class="btn btn-default">
+								{{ $sv->hoten }}
+								<input type="text" name="hoten" id="hoten" value="{{ $sv->hoten }}" hidden>
+								<button type="button" id="btn_doc_ten" class="btn btn-default">
+								<script src="<?php echo asset('js/input_card.js')?>"></script>
 								<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-								Đọc họ tên</button>
+								Đọc lại họ tên</button>
 							</td>
 						</tr>
 
 						<tr>
 							<th>MSSV</th>
-							<td>B1301110</td>
+							<td>
+								{{ $sv->mssv }}
+							</td>
 						</tr>
 
 						<tr>
 							<th>Ngày sinh</th>
-							<td>01/02/1995</td>
+							<td>
+								{{ date("d-m-Y", strtotime($sv->ngsinh)) }}
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 @endsection

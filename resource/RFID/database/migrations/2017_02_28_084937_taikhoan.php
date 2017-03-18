@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Sinhvien extends Migration
+class Taikhoan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class Sinhvien extends Migration
      */
     public function up()
     {
-        Schema::create('sinhvien', function ($table) {
-            $table->string('mssv',8);
-            $table->string('hoten',50);
-            $table->string('sdt',11);
-            $table->date('ngsinh');
-            $table->boolean('dangki');
-            $table->primary('mssv');
+        Schema::create('taikhoan', function ($table) {
+            $table->string('uname', 50);
+            $table->string('pass');
+            $table->primary('uname');
         });
     }
 
@@ -30,6 +27,6 @@ class Sinhvien extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sinhvien');    
+        Schema::dropIfExists('taikhoan');
     }
 }
