@@ -72,13 +72,8 @@ class MyController extends Controller
     public function AddSV(Request $request)
     {
         try {
-            $sinhvien = new sinhvien();
-            $sinhvien->hoten = $request->hoten;
-            $sinhvien->mssv = $request->mssv;
-            $sinhvien->sdt = $request->sdt;
-            $sinhvien->ngsinh = $request->ngsinh;
-            $sinhvien->dangki = false;
-            $sinhvien->save();
+            sinhvien::Them_SV($request->mssv, $request->hoten, $request->sdt, 
+                $request->ngsinh);
             return redirect('/trangquantri');
         } catch (Exception $e) {
             echo "Thêm thất bại"."<br>";
@@ -110,45 +105,22 @@ class MyController extends Controller
 
     public function XuLySuaSV(Request $request)
     {
+        sinhvien::CapNhat_SV($request->mssv, $request->hoten, 
+            $request->sdt, $request->ngsinh);
         $sinhvien = sinhvien::find($request->mssv);
-        if ($sinhvien != null) {
-            try {
-                $sinhvien->hoten = $request->hoten;
-                $sinhvien->sdt = $request->sdt;
-                $sinhvien->ngsinh = $request->ngsinh;
-                $sinhvien->save();
-                if($sinhvien->dangki == 'false')
-                    return redirect('/trangquantri');
-                else
-                    return redirect('/XoaThe');
-            } catch (\Exception $e) {
-                \Session::put('kq_dki', 'failed_update');
-                return redirect('/SuaSV/' . $request->mssv);
-            }
-        }
+        if($sinhvien->dangki == 'false')
+            return redirect('/trangquantri');
+        else
+            return redirect('/XoaThe');
     }
 
     public function DangKiThe(Request $request)
     {
-        try {
-            $dkthe = new dang_ky_the();
-            $dkthe->id = $request->id;
-            $dkthe->mssv = $request->mssv;
-            $dkthe->save();
-        } catch (\Exception $e) {
-            \Session::put('kq_dki', 'failed_card');
-            return redirect('trangquantri');
-        }
+        dang_ky_the::Them_The($request->id, $request->mssv);
+        
+        sinhvien::CapNhat_DangKi($request->mssv);
 
-        try {
-            $sinhvien = sinhvien::find($request->mssv);
-            $sinhvien->dangki = true;
-            $sinhvien->save();
-        } catch (\Exception $e) {
-            \Session::put('kq_dki', 'failed_sv');
-            return redirect('trangquantri');
-        }
-
+        $sinhvien = sinhvien::find($request->mssv);
         \Session::put('kq_dki', 'success');
         \Session::put('sv_dki', $sinhvien->hoten);
         return redirect('trangquantri');
@@ -171,11 +143,9 @@ class MyController extends Controller
                     MyController::XoaSV($sinhvien->mssv);
                 }
                 else{
-                    $sinhvien = $the->sinhvien;
-                    $sinhvien->dangki = false;
-                    $sinhvien->save();
+                    sinhvien::CapNhat_DangKi($mssv);
                 }
-                return redirect('/trangquantri');
+                return redirect('/XoaThe');
             } catch (\Exception $e) {
                 echo "Xóa thẻ thất bại<br>";
                 echo $e->getMessage();
