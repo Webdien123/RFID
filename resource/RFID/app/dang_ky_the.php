@@ -17,14 +17,9 @@ class dang_ky_the extends Model
 
     public static function Them_The($id, $mssv)
     {
-    	try {
-	    	$dkthe = new dang_ky_the();
-	        $dkthe->id = $id;
-	        $dkthe->mssv = $mssv;
-	        $dkthe->save();
-        } catch (\Exception $e) {
-            \Session::put('kq_dki', 'failed_card');
-            return redirect('trangquantri');
-        }
+    	$dkthe = new dang_ky_the();
+        $dkthe->id = $id;
+        $dkthe->mssv = $mssv;
+        $dkthe->save();
     }
 }

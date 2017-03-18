@@ -116,7 +116,12 @@ class MyController extends Controller
 
     public function DangKiThe(Request $request)
     {
-        dang_ky_the::Them_The($request->id, $request->mssv);
+        try {
+            dang_ky_the::Them_The($request->id, $request->mssv);
+        } catch (\Exception $e) {
+            \Session::put('kq_dki', 'failed_card');
+            return redirect()->route('goAdmin');
+        }
         
         sinhvien::CapNhat_DangKi($request->mssv);
 
