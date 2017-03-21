@@ -51,6 +51,17 @@
 										</tr>
 									@endif
 
+									@if( Session::get('kq_dki') == 'invalid_card')
+										<tr>
+											<th colspan="2">
+												<div class="alert alert-danger alert-dismissable" id="error-alert">
+													<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+													<strong>Đăng kí thất bại!</strong> Mã thẻ không hợp lệ
+												</div>
+											</th>
+										</tr>
+									@endif
+
 									<?php  
 										Session::forget('sv_dki');
 										Session::forget('kq_dki');

@@ -120,6 +120,9 @@ class MyController extends Controller
             dang_ky_the::Them_The($request->id, $request->mssv);
         } catch (\Exception $e) {
             \Session::put('kq_dki', 'failed_card');
+            if (strlen($request->id) > 10) {
+                \Session::put('kq_dki', 'invalid_card');
+            }
             return redirect()->route('goAdmin');
         }
         

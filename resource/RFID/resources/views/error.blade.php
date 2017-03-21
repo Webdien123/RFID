@@ -24,7 +24,7 @@
 
 			<center><img src="<?php echo asset('img/sad.png')?>" class="img-responsive" alt="Image"></center>
 			
-			<h3 class="text-center">Bấm vào đây để thử lại hoặc về trang quản trị để thực hiện các thao tác khác.</h3>
+			<h3 class="text-center">Vui long về trang quản trị thử lại.</h3>
 
 		</div>
 	</body>
