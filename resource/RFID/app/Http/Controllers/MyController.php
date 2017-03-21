@@ -37,7 +37,7 @@ class MyController extends Controller
     public function goAdmin()
     {
         if (\Session::has('uname')) {
-            $danhsachsv = \DB::table('sinhvien')->where('dangki', false)->get();
+            $danhsachsv = \DB::table('sinhvien')->where('dangki', false)->paginate(5);
             return view('admin', ['danhsachsv' => $danhsachsv]);
         }
         else{
@@ -136,7 +136,7 @@ class MyController extends Controller
 
     public function XoaThe()
     {
-        $danhsachthe = dang_ky_the::all();
+        $danhsachthe = dang_ky_the::paginate(10);
         return view('XoaThe', ['danhsachthe' => $danhsachthe]);
     }
 

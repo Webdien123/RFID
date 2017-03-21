@@ -65,6 +65,9 @@
 		 			@endif
 	 			</tbody>
 	 		</table>
+	 		<center>
+				{!! $danhsachthe->links() !!}	
+			</center>
 		</div>
 		
 	</body>

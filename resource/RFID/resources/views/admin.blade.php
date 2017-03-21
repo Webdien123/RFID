@@ -243,7 +243,10 @@
 				@endif
 				</tbody>
 			</table>
-
+			<center>
+				{!! $danhsachsv->links() !!}	
+			</center>
+			
 		</div>
 
 	</body>
