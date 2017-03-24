@@ -15,7 +15,7 @@ class Sinhvien extends Migration
     {
         Schema::create('sinhvien', function ($table) {
             $table->string('mssv',8);
-            $table->string('hoten',50);
+            $table->string('hoten');
             $table->string('sdt',11);
             $table->string('ngsinh', 10);
             $table->boolean('dangki');

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Trang chủ</title>
+		<title>Trang đăng nhập</title>
 		@include('link_css_js')
 		
 		<script src="<?php echo asset('js/jquery.validate.js')?>"></script>

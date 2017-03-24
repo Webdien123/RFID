@@ -11,7 +11,10 @@ $(document).ready(function () {
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
     $("#f_addsv").validate({
         rules: {
-            hoten: "required",
+            hoten: {
+                required: true,
+                maxlength: 50
+            },
             mssv:{
                 required: true,
                 maxlength: 8
@@ -26,7 +29,10 @@ $(document).ready(function () {
         },
 
         messages: {
-            hoten: "Bạn chưa nhập tên",
+            hoten: {
+                required: "Bạn chưa nhập tên",
+                maxlength: "Họ tên tối đa là 50 kí tự"
+            },
             mssv: {
                 required: "Bạn chưa nhập mã số",
                 maxlength: "Mã số tối đa là 8 kí tự"
