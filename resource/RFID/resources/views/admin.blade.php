@@ -80,7 +80,7 @@
 										<th>
 											<form action="{{ route('DangKiThe') }}" method="post">
 												{{ csrf_field() }}
-												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí">
+												<input type="text" name="id" id="MaThe" placeholder="quét thẻ để đăng kí" required>
 												<input type="hidden" name="mssv" value="{{ $danhsachsv[0]->mssv }}">
 												<input type="submit"
 									   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
