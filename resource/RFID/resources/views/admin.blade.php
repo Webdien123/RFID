@@ -18,6 +18,13 @@
 	<body>
 		<div class="container-fluid">
 			@include('admin_header')
+
+			
+			<?php 
+			if (isset($_GET['page'])) {
+				\Session::put('page', $_GET['page']); 
+			}
+			?>
 			<h1 class="text-center">Đăng ký thẻ mới</h1>
 
 			<div class="row">
@@ -211,7 +218,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				@if( count($danhsachsv) > 1 )
+				@if( count($danhsachsv) > 0 )
 					@for($i = 1; $i < count($danhsachsv); $i++)
 						<tr>
 							<td>{{ $danhsachsv[$i]->hoten }}</td>
@@ -244,7 +251,7 @@
 				</tbody>
 			</table>
 			<center>
-				{!! $danhsachsv->links() !!}	
+				{!! $danhsachsv->links() !!}
 			</center>
 			
 		</div>

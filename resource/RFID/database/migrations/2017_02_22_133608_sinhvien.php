@@ -17,7 +17,7 @@ class Sinhvien extends Migration
             $table->string('mssv',8);
             $table->string('hoten',50);
             $table->string('sdt',11);
-            $table->date('ngsinh');
+            $table->string('ngsinh', 10);
             $table->boolean('dangki');
             $table->primary('mssv');
         });

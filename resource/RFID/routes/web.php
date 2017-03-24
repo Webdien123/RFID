@@ -35,3 +35,5 @@ Route::post('DangKiThe', 'MyController@DangKiThe')->name('DangKiThe');
 Route::get('XoaThe', 'MyController@XoaThe')->name('XoaThe');
 
 Route::get('XuLyXoaThe/{id}/{xoasv}', 'MyController@XuLyXoaThe')->name('XuLyXoaThe');
+
+Route::get('TimKiem', 'MyController@TimKiem')->name('TimKiem');

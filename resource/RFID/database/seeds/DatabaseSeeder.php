@@ -26,7 +26,7 @@ class SinhVienData extends Seeder
 	public function run()
 	{
 		DB::insert('insert into sinhvien (mssv, hoten, sdt, ngsinh, dangki) values (?, ?, ?, ?, ?)', ['B1300001', 'Nguyễn Văn A', '0919000001', '1995-02-01', false]);
-		DB::insert('insert into sinhvien (mssv, hoten, sdt, ngsinh, dangki) values (?, ?, ?, ?, ?)', ['B1300002', 'Nguyễn Văn B', '0919000002', '1995-02-01', false]);
+		DB::insert('insert into sinhvien (mssv, hoten, sdt, ngsinh, dangki) values (?, ?, ?, ?, ?)', ['B1300002', 'Nguyễn Văn B', '0919000002', '1995-02-01', true]);
 		DB::insert('insert into sinhvien (mssv, hoten, sdt, ngsinh, dangki) values (?, ?, ?, ?, ?)', ['B1300003', 'Nguyễn Văn C', '0919000003', '1995-02-01', false]);
 		DB::insert('insert into sinhvien (mssv, hoten, sdt, ngsinh, dangki) values (?, ?, ?, ?, ?)', ['B1300004', 'Nguyễn Văn D', '0919000004', '1995-02-01', false]);
 		DB::insert('insert into sinhvien (mssv, hoten, sdt, ngsinh, dangki) values (?, ?, ?, ?, ?)', ['B1300005', 'Nguyễn Văn E', '0919000005', '1995-02-01', false]);

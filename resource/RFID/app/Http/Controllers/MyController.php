@@ -37,7 +37,7 @@ class MyController extends Controller
     public function goAdmin()
     {
         if (\Session::has('uname')) {
-            $danhsachsv = \DB::table('sinhvien')->where('dangki', false)->paginate(5);
+            $danhsachsv = \DB::table('sinhvien')->where('dangki', false)->Paginate(5);
             return view('admin', ['danhsachsv' => $danhsachsv]);
         }
         else{
@@ -161,5 +161,18 @@ class MyController extends Controller
                 echo $e->getMessage();
             }
         }
+    }
+
+    public function TimKiem(Request $request)
+    {
+        $TuKhoa = $request->TuKhoa;
+        
+        $danhsachsv = \DB::table('sinhvien')->where('hoten', 'like', "%$TuKhoa%")
+            ->orWhere('sdt', 'like', "%$TuKhoa%")
+            ->orWhere('mssv', 'like', "%$TuKhoa%")
+            ->orWhere('ngsinh', 'like', "%$TuKhoa%")
+            ->paginate(5)->appends(['TuKhoa' => $TuKhoa]);
+            
+        return view('TimKiem', ['danhsachsv' => $danhsachsv, 'TuKhoa' => $TuKhoa]);
     }
 }
