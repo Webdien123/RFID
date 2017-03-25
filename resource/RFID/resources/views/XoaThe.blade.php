@@ -7,11 +7,21 @@
 		<title>Trang hủy thẻ</title>
 
 		@include('link_css_js')
+
+		<script src="<?php echo asset('js/validate_addsv_form.js')?>"></script>
 	</head>
 	<body>
 		<div class="container-fluid">
 			@include('admin_header')
 			<br>
+			<div class="col-sm-12">
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary"  data-toggle="modal" href='#modal-themsv' id="btn_them_sv">
+						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+						Thêm sinh viên
+					</button>
+			</div>	
+
 			<h1 class="text-center">Danh sách sinh viên đã đăng kí</h1>
 
 	 		<table class="table table-hover table-bordered">
