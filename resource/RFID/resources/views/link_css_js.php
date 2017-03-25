@@ -9,3 +9,6 @@
 
 <!-- Vietnamese speak api -->
 <script src='<?php echo asset('js/responsivevoice.js')?>'></script>
+
+<!-- Page icon -->
+<link rel="icon" href="<?php echo asset('img/icon.png')?>">

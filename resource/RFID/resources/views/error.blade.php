@@ -8,12 +8,6 @@
 
 		@include('link_css_js')
 
-		<script src="<?php echo asset('js/jquery.validate.js')?>"></script>
-
-		<script src="<?php echo asset('js/validate_addsv_form.js')?>"></script>
-		
-		<script src="<?php echo asset('js/focus_card.js')?>"></script>
-
 	</head>
 
 	<body>
@@ -23,8 +17,15 @@
 			<h1 class="text-center text-danger">{{ $mes }}</h1>
 
 			<center><img src="<?php echo asset('img/sad.png')?>" class="img-responsive" alt="Image"></center>
+
+			<h3 class="text-center"><b>{{ $re }}</b></h3>
 			
-			<h3 class="text-center">Vui lòng về trang quản trị thử lại.</h3>
+			<h3 class="text-center">Bấm vào 
+				<a onclick="window.history.back();">đây</a>
+				để thử lại. Hoặc  
+				<a href="{{ route('goAdmin') }}">về trang quản trị</a>
+				thực hiện chức năng khác.
+			</h3>
 
 		</div>
 	</body>

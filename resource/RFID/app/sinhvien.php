@@ -58,4 +58,5 @@ class sinhvien extends Model
             return redirect('trangquantri');
         }
     }
+
 }

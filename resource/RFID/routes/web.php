@@ -12,8 +12,6 @@
 
 Route::get('/', 'MyController@GetViewHome')->name('GetViewHome');
 
-Route::get('login', 'MyController@login')->name('login');
-
 Route::post('login_process', 'MyController@login_process')->name('login_process');
 
 Route::get('trangquantri', 'MyController@goAdmin')->name('goAdmin');
@@ -37,3 +35,5 @@ Route::get('XoaThe', 'MyController@XoaThe')->name('XoaThe');
 Route::get('XuLyXoaThe/{id}/{xoasv}', 'MyController@XuLyXoaThe')->name('XuLyXoaThe');
 
 Route::get('TimKiem', 'MyController@TimKiem')->name('TimKiem');
+
+Route::get('Error/{mes}/{re}', 'MyController@Error')->name('Error');

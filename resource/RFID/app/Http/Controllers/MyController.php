@@ -26,12 +26,6 @@ class MyController extends Controller
         else{
             return view('non_res_card');
         }
-        
-    }
-
-    public function login()
-    {
-        return view('login');
     }
 
     public function goAdmin()
@@ -41,7 +35,7 @@ class MyController extends Controller
             return view('admin', ['danhsachsv' => $danhsachsv]);
         }
         else{
-            return redirect()->route('login');
+            return view('login');
         }
     }
 
@@ -74,11 +68,11 @@ class MyController extends Controller
         try {
             sinhvien::Them_SV($request->mssv, $request->hoten, $request->sdt, 
                 $request->ngsinh);
-            return redirect()->route('goAdmin');
-        } catch (Exception $e) {
-            echo "Thêm thất bại"."<br>";
-            echo $e->getMessage();
+        } catch (\Exception $e) {
+            return redirect()->route('Error', 
+                ['mes' => 'Thêm sinh viên thất bại', 'reason' => 'Mã số sinh viên đã tồn tại']);
         }
+        return redirect()->route('goAdmin');
     }
 
     public static function XoaSV($mssv)
@@ -88,10 +82,14 @@ class MyController extends Controller
             try {
                 $sinhvien->delete();
                 return redirect()->route('goAdmin');
-            } catch (Exception $e) {
-                echo "Xóa thất bại"."<br>";
-                echo $e->getMessage();
+            } catch (\Exception $e) {
+                return redirect()->route('Error', 
+                ['mes' => 'Xóa Sinh viên thất bại', 'reason' => '']);
             }
+        }
+        else{
+            return redirect()->route('Error', 
+                ['mes' => 'Xóa sinh viên thất bại', 'reason' => 'Không tìm thấy sinh viên, vui lòng kiểm tra kết nối mạng']);
         }
     }
 
@@ -100,6 +98,10 @@ class MyController extends Controller
         $sinhvien = sinhvien::find($mssv);
         if ($sinhvien != null) {;
             return view('Edit', ['sv' => $sinhvien]);
+        }
+        else{
+            return redirect()->route('Error', 
+                ['mes' => 'Cập nhật thất bại', 'reason' => 'Không tìm thấy sinh viên, vui lòng kiểm tra kết nối mạng']);
         }
     }
 
@@ -149,17 +151,19 @@ class MyController extends Controller
                 $the->delete();
                 if($xoasv == "true"){
                     MyController::XoaSV($mssv);
-                    echo "Xóa cả thông tin sinh viên";
                 }
                 else{
                     sinhvien::CapNhat_DangKi($mssv);
-                    echo "Không xóa thông tin";
                 }
                 return redirect()->route('XoaThe');
             } catch (\Exception $e) {
-                echo "Xóa thẻ thất bại<br>";
-                echo $e->getMessage();
+                return redirect()->route('Error', 
+                ['mes' => 'Xóa thẻ thất bại', 'reason' => 'Có lỗi trong quá trình xử lý, vui long thử lại']);
             }
+        }
+        else{
+            return redirect()->route('Error', 
+                ['mes' => 'Xóa thẻ thất bại', 'reason' => 'Không tìm thấy thẻ, vui lòng kiểm tra kết nối mạng']);
         }
     }
 
@@ -174,5 +178,10 @@ class MyController extends Controller
             ->paginate(5)->appends(['TuKhoa' => $TuKhoa]);
             
         return view('TimKiem', ['danhsachsv' => $danhsachsv, 'TuKhoa' => $TuKhoa]);
+    }
+
+    public function Error($mes, $re)
+    {
+        return view('Error', ['mes' => $mes, 're' => $re]);
     }
 }

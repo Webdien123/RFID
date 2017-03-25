@@ -14,6 +14,9 @@
 		<div class="container-fluid">
 			@include('admin_header')
 			<br>
+
+			<h1 class="text-center">Danh sách sinh viên đã đăng kí</h1>
+
 			<div class="col-sm-12">
 				<div class="pull-left">
 					<button type="button" class="btn btn-primary"  data-toggle="modal" href='#modal-themsv' id="btn_them_sv">
@@ -22,7 +25,50 @@
 					</button>
 			</div>	
 
-			<h1 class="text-center">Danh sách sinh viên đã đăng kí</h1>
+			<div class="modal fade" id="modal-themsv">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Thêm sinh viên</h4>
+						</div>
+						<div class="modal-body">
+							<form action="{{ route('AddSV') }}" method="POST" id="f_addsv">
+								{{ csrf_field() }}
+								<div class="form-group">
+									<label for="">Họ tên:</label>
+									<input type="text" name="hoten" id="hoten" class="form-control" placeholder="họ tên">
+								</div>
+
+								<div class="form-group">
+									<label for="">MSSV:</label>
+									<input type="text" name="mssv" id="mssv" class="form-control" placeholder="mã số sinh viên">
+								</div>
+
+								<div class="form-group">
+									<label for="">Số điện thoại:</label>
+									<input type="text" name="sdt" id="sdt" class="form-control" placeholder="số điện thoại">
+								</div>
+
+								<div class="form-group">
+									<label for="">Ngày sinh:</label>
+									<input type="date" name="ngsinh" id="ngsinh" class="form-control">
+								</div>
+
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+									Hủy
+								</button>
+
+								<button type="submit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+									Thêm sinh viên
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
 	 		<table class="table table-hover table-bordered">
 	 			<thead>
