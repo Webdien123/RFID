@@ -44,7 +44,7 @@ class MyController extends Controller
         $taikhoan = taikhoan::find($request->uname);
         if ($taikhoan == null) {
             \Session::put('err', '1');
-            return redirect()->route('login');
+            return view('login');
         }
         
         if ($taikhoan->KT_taikhoan($request->pass)) {
@@ -52,7 +52,7 @@ class MyController extends Controller
             return redirect()->route('goAdmin');
         } else {
             \Session::put('err', '1');
-            return redirect()->route('login');
+            return view('login');
         }
     }
 
