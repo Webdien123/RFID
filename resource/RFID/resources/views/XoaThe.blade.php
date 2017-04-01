@@ -7,6 +7,7 @@
 		<title>Trang hủy thẻ</title>
 
 		@include('link_css_js')
+		<script src="<?php echo asset('js/jquery.validate.js')?>"></script>
 
 		<script src="<?php echo asset('js/validate_addsv_form.js')?>"></script>
 	</head>

@@ -44,7 +44,7 @@
 						$sub1 = mb_substr($str, $index, $length, "UTF-8");
 
 						$KQ = str_replace($TK ,"<span class='bg-danger'>$sub1</span>", $Chuoi);
-						return mb_strtolower($KQ);
+						return $KQ;
 					}
 					else
 						return $str;

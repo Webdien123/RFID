@@ -138,7 +138,7 @@ class MyController extends Controller
 
     public function XoaThe()
     {
-        $danhsachthe = dang_ky_the::paginate(10);
+        $danhsachthe = dang_ky_the::paginate(5);
         return view('XoaThe', ['danhsachthe' => $danhsachthe]);
     }
 
