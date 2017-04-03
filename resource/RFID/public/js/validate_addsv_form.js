@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $("#success-alert").fadeTo(1100, 500).slideUp(500, function(){
         $("#success-alert").slideUp(500);
     });
@@ -7,6 +6,7 @@ $(document).ready(function () {
     $("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
         $("#success-alert").slideUp(500);
     });
+
 
     // Hàm xử lý thông báo và ràng buột khi nhập dữ liệu
     $("#f_addsv").validate({
@@ -25,7 +25,9 @@ $(document).ready(function () {
                 minlength: 10,
                 maxlength: 11
             },
-            ngsinh: "required"
+            ngsinh: {
+                required: true;
+            }
         },
 
         messages: {
@@ -43,7 +45,9 @@ $(document).ready(function () {
                 minlength: "số điện thoại tối thiểu 10 chữ số",
                 maxlength: "số điện thoại tối đa 11 chữ số"
             },
-            ngsinh: "Bạn chưa nhập ngày sinh"
+            ngsinh: {
+                required: "Bạn chưa nhập ngày sinh"
+            }
         },
 
         errorPlacement: function (error, element) {

@@ -7,11 +7,11 @@
 		<title>Trang đăng kí</title>
 
 		@include('link_css_js')
-		<script src="<?php echo asset('js/jquery.validate.js')?>"></script>
+		<script src="<?php echo asset('public/js/jquery.validate.js')?>"></script>
 
-		<script src="<?php echo asset('js/validate_addsv_form.js')?>"></script>
+		<script src="<?php echo asset('public/js/validate_addsv_form.js')?>"></script>
 		
-		<script src="<?php echo asset('js/focus_card.js')?>"></script>
+		<script src="<?php echo asset('public/js/focus_card.js')?>"></script>
 
 	</head>
 

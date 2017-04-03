@@ -23,7 +23,7 @@
 								{{ $sv->hoten }}
 								<input type="text" name="hoten" id="hoten" value="{{ $sv->hoten }}" hidden>
 								<button type="button" id="btn_doc_ten" class="btn btn-default">
-								<script src="<?php echo asset('js/input_card.js')?>"></script>
+								<script src="<?php echo asset('public/js/input_card.js')?>"></script>
 								<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 								Đọc lại họ tên</button>
 							</td>

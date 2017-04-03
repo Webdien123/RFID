@@ -6,9 +6,9 @@
 		<title>Trang đăng nhập</title>
 		@include('link_css_js')
 		
-		<script src="<?php echo asset('js/jquery.validate.js')?>"></script>
+		<script src="<?php echo asset('public/js/jquery.validate.js')?>"></script>
 
-		<script src="<?php echo asset('js/validate_login_form.js')?>"></script>
+		<script src="<?php echo asset('public/js/validate_login_form.js')?>"></script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -24,12 +24,12 @@
 							{{ csrf_field() }}
 							<div class="form-group">
 								<label for="">Tên đang nhập:</label>
-								<input type="text" class="form-control" name="uname" id="uname" placeholder="tên đăng nhập">
+								<input type="text" class="form-control" name="uname" id="uname" placeholder="Tên đăng nhập">
 							</div>
 						
 							<div class="form-group">
 								<label for="">Mật khẩu:</label>
-								<input type="password" class="form-control" name="pass" id="pass" placeholder="mật khẩu">
+								<input type="password" class="form-control" name="pass" id="pass" placeholder="Mật khẩu">
 							</div>
 
 							<?php 

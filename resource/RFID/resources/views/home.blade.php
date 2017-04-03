@@ -7,7 +7,7 @@
 		<title>Trang chủ</title>
 		@include('link_css_js')
 
-		<script src="<?php echo asset('js/focus_card.js')?>"></script>
+		<script src="<?php echo asset('public/js/focus_card.js')?>"></script>
 	</head>
 
 	<body>
@@ -33,7 +33,7 @@
 
 			<form action="{{ route('Input_card') }}" method="post" class="text-center" id="f_quet_the">
 				{{ csrf_field() }}
-				Mã thẻ: <input type="text" name="id" id="MaThe" required>
+				Mã thẻ: <input type="text" name="id" id="MaThe" required placeholder="Hãy quét thẻ của bạn">
 				<input type="submit"
 	   				style="position: absolute; left: -9999px; width: 1px; height: 1px;"tabindex="-1" />
 			</form>
