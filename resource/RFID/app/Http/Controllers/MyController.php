@@ -65,119 +65,159 @@ class MyController extends Controller
 
     public function AddSV(Request $request)
     {
-        try {
-            sinhvien::Them_SV($request->mssv, $request->hoten, $request->sdt, 
-                $request->ngsinh);
-        } catch (\Exception $e) {
-            return redirect()->route('Error', 
-                ['mes' => 'Thêm sinh viên thất bại', 'reason' => 'Mã số sinh viên đã tồn tại']);
+        if (\Session::has('uname')) {
+            try {
+                sinhvien::Them_SV($request->mssv, $request->hoten, $request->sdt, 
+                    $request->ngsinh);
+            } catch (\Exception $e) {
+                return redirect()->route('Error', 
+                    ['mes' => 'Thêm sinh viên thất bại', 'reason' => 'Mã số sinh viên đã tồn tại']);
+            }
+            return redirect()->route('goAdmin');
         }
-        return redirect()->route('goAdmin');
+        else{
+            return view('login');
+        }
     }
 
     public static function XoaSV($mssv)
     {
-        $sinhvien = sinhvien::find($mssv);
-        if ($sinhvien != null) {
-            try {
-                $sinhvien->delete();
-                return redirect()->route('goAdmin');
-            } catch (\Exception $e) {
+        if (\Session::has('uname')) {
+            $sinhvien = sinhvien::find($mssv);
+            if ($sinhvien != null) {
+                try {
+                    $sinhvien->delete();
+                    return redirect()->route('goAdmin');
+                } catch (\Exception $e) {
+                    return redirect()->route('Error', 
+                    ['mes' => 'Xóa Sinh viên thất bại', 'reason' => '']);
+                }
+            }
+            else{
                 return redirect()->route('Error', 
-                ['mes' => 'Xóa Sinh viên thất bại', 'reason' => '']);
+                    ['mes' => 'Xóa sinh viên thất bại', 'reason' => 'Không tìm thấy sinh viên, vui lòng kiểm tra kết nối mạng']);
             }
         }
         else{
-            return redirect()->route('Error', 
-                ['mes' => 'Xóa sinh viên thất bại', 'reason' => 'Không tìm thấy sinh viên, vui lòng kiểm tra kết nối mạng']);
+            return view('login');
         }
     }
 
     public function SuaSV($mssv)
     {
-        $sinhvien = sinhvien::find($mssv);
-        if ($sinhvien != null) {;
-            return view('Edit', ['sv' => $sinhvien]);
+        if (\Session::has('uname')) {
+            $sinhvien = sinhvien::find($mssv);
+            if ($sinhvien != null) {;
+                return view('Edit', ['sv' => $sinhvien]);
+            }
+            else{
+                return redirect()->route('Error', 
+                    ['mes' => 'Cập nhật thất bại', 'reason' => 'Không tìm thấy sinh viên, vui lòng kiểm tra kết nối mạng']);
+            }
         }
         else{
-            return redirect()->route('Error', 
-                ['mes' => 'Cập nhật thất bại', 'reason' => 'Không tìm thấy sinh viên, vui lòng kiểm tra kết nối mạng']);
+            return view('login');
         }
     }
 
     public function XuLySuaSV(Request $request)
     {
-        sinhvien::CapNhat_SV($request->mssv, $request->hoten, 
-            $request->sdt, $request->ngsinh);
-        $sinhvien = sinhvien::find($request->mssv);
-        if($sinhvien->dangki == 'false')
-            return redirect()->route('goAdmin');
-        else
-            return redirect()->route('XoaThe');
+        if (\Session::has('uname')) {
+            sinhvien::CapNhat_SV($request->mssv, $request->hoten, 
+                $request->sdt, $request->ngsinh);
+            $sinhvien = sinhvien::find($request->mssv);
+            if($sinhvien->dangki == 'false')
+                return redirect()->route('goAdmin');
+            else
+                return redirect()->route('XoaThe');
+        }
+        else{
+            return view('login');
+        }   
     }
 
     public function DangKiThe(Request $request)
     {
-        try {
-            dang_ky_the::Them_The($request->id, $request->mssv);
-        } catch (\Exception $e) {
-            \Session::put('kq_dki', 'failed_card');
-            if (strlen($request->id) > 10) {
-                \Session::put('kq_dki', 'invalid_card');
+        if (\Session::has('uname')) {
+            try {
+                dang_ky_the::Them_The($request->id, $request->mssv);
+            } catch (\Exception $e) {
+                \Session::put('kq_dki', 'failed_card');
+                if (strlen($request->id) > 10) {
+                    \Session::put('kq_dki', 'invalid_card');
+                }
+                return redirect()->route('goAdmin');
             }
+            
+            sinhvien::CapNhat_DangKi($request->mssv);
+
+            $sinhvien = sinhvien::find($request->mssv);
+            \Session::put('kq_dki', 'success');
+            \Session::put('sv_dki', $sinhvien->hoten);
             return redirect()->route('goAdmin');
         }
-        
-        sinhvien::CapNhat_DangKi($request->mssv);
-
-        $sinhvien = sinhvien::find($request->mssv);
-        \Session::put('kq_dki', 'success');
-        \Session::put('sv_dki', $sinhvien->hoten);
-        return redirect()->route('goAdmin');
+        else{
+            return view('login');
+        }  
     }
 
     public function XoaThe()
     {
-        $danhsachthe = dang_ky_the::paginate(5);
-        return view('XoaThe', ['danhsachthe' => $danhsachthe]);
+        if (\Session::has('uname')) {
+            $danhsachthe = dang_ky_the::paginate(5);
+            return view('XoaThe', ['danhsachthe' => $danhsachthe]);
+        }
+        else{
+            return view('login');
+        }  
     }
 
     public function XuLyXoaThe($id, $xoasv)
     {
-        $the = dang_ky_the::find($id);
-        if($the){
-            try {
-                $mssv = $the->sinhvien->mssv;
-                $the->delete();
-                if($xoasv == "true"){
-                    MyController::XoaSV($mssv);
+        if (\Session::has('uname')) {
+            $the = dang_ky_the::find($id);
+            if($the){
+                try {
+                    $mssv = $the->sinhvien->mssv;
+                    $the->delete();
+                    if($xoasv == "true"){
+                        MyController::XoaSV($mssv);
+                    }
+                    else{
+                        sinhvien::CapNhat_DangKi($mssv);
+                    }
+                    return redirect()->route('XoaThe');
+                } catch (\Exception $e) {
+                    return redirect()->route('Error', 
+                    ['mes' => 'Xóa thẻ thất bại', 'reason' => 'Có lỗi trong quá trình xử lý, vui long thử lại']);
                 }
-                else{
-                    sinhvien::CapNhat_DangKi($mssv);
-                }
-                return redirect()->route('XoaThe');
-            } catch (\Exception $e) {
+            }
+            else{
                 return redirect()->route('Error', 
-                ['mes' => 'Xóa thẻ thất bại', 'reason' => 'Có lỗi trong quá trình xử lý, vui long thử lại']);
+                    ['mes' => 'Xóa thẻ thất bại', 'reason' => 'Không tìm thấy thẻ, vui lòng kiểm tra kết nối mạng']);
             }
         }
         else{
-            return redirect()->route('Error', 
-                ['mes' => 'Xóa thẻ thất bại', 'reason' => 'Không tìm thấy thẻ, vui lòng kiểm tra kết nối mạng']);
-        }
+            return view('login');
+        }  
     }
 
     public function TimKiem(Request $request)
     {
-        $TuKhoa = $request->TuKhoa;
-        
-        $danhsachsv = \DB::table('sinhvien')->where('hoten', 'like', "%$TuKhoa%")
-            ->orWhere('sdt', 'like', "%$TuKhoa%")
-            ->orWhere('mssv', 'like', "%$TuKhoa%")
-            ->orWhere('ngsinh', 'like', "%$TuKhoa%")
-            ->paginate(5)->appends(['TuKhoa' => $TuKhoa]);
+        if (\Session::has('uname')) {
+            $TuKhoa = $request->TuKhoa;
             
-        return view('TimKiem', ['danhsachsv' => $danhsachsv, 'TuKhoa' => $TuKhoa]);
+            $danhsachsv = \DB::table('sinhvien')->where('hoten', 'like', "%$TuKhoa%")
+                ->orWhere('sdt', 'like', "%$TuKhoa%")
+                ->orWhere('mssv', 'like', "%$TuKhoa%")
+                ->orWhere('ngsinh', 'like', "%$TuKhoa%")
+                ->paginate(5)->appends(['TuKhoa' => $TuKhoa]);
+                
+            return view('TimKiem', ['danhsachsv' => $danhsachsv, 'TuKhoa' => $TuKhoa]);
+        }
+        else{
+            return view('login');
+        }  
     }
 
     public function Error($mes, $re)
