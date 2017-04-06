@@ -1,8 +1,8 @@
 <?php 
 				function stripUnicode($str){
 					$ThaiThe = $str;
-					if(!$ThaiThe) return null;
-						$unicode = array(
+					if($ThaiThe == null) return null;
+					$unicode = array(
 						'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
 						'd'=>'đ',
 						'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
@@ -35,16 +35,22 @@
 					$Chuoi = stripUnicode($str);
 
 					$index = stripos($Chuoi, $TK);
+					$index = ($index !== 0 && $index == 0) ? -1 : $index;
 
-					if ($index || strtolower($Chuoi[0]) == strtolower($TK[0])){
+					if ($index !== -1){
 						$length = strlen($TK);
 
 						$Chuoi = utf8_substr_replace($str, $TK, $index , $length);
 
 						$sub1 = mb_substr($str, $index, $length, "UTF-8");
 
-						$KQ = str_replace($TK ,"<span class='bg-danger'>$sub1</span>", $Chuoi);
-						return $KQ;
+						if ($index === 0)
+							$KQ = str_replace($TK ,"<span class='bg-danger'>$sub1</span>", $Chuoi);
+						else{
+							$sub2 = strtolower($sub1);
+							$KQ = str_replace($TK ,"<span class='bg-danger'>$sub2</span>", $Chuoi);
+						}
+						return $KQ;	
 					}
 					else
 						return $str;
